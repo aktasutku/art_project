@@ -1,0 +1,63 @@
+.wall {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  padding: 50px 10px 50px 100px;
+  gap: 20px;
+}
+.wall h1 {
+  width: max-content;
+  border-bottom: 2px solid var(--main-color);
+  font-size: 3rem;
+  letter-spacing: 0.2rem;
+}
+
+.wall__img {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+  height: max-content;
+}
+
+.wall__img img {
+  cursor: pointer;
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.wall__img img:hover {
+  box-shadow: 5px 21px 30px 1px rgba(0, 0, 0, 0.8);
+  -webkit-box-shadow: 5px 21px 30px 1px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 5px 21px 30px 1px rgba(0, 0, 0, 0.8);
+}
+
+@media only screen and (max-width: 1300px) {
+}
+
+@media only screen and (max-width: 1100px) {
+}
+
+@media only screen and (max-width: 900px) {
+}
+
+@media only screen and (max-width: 600px) {
+
+  .wall h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .wall h1 {
+    font-size: 2rem;
+  }
+  .wall {
+    padding: 50px 10px 150px 20px;
+  }
+  .wall__img {
+    justify-content: center;
+  }
+}
