@@ -1,0 +1,12 @@
+.shopPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    height: max-content;
+    padding: 50px;
+    gap: 40px 25px;
+
+}

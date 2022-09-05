@@ -1,24 +1,25 @@
 import "./App.css";
-import Shop from "./Shop";
-import Carousel from "./Carousel";
+
 import Header from "./components/Header";
-import Wall from "./Wall";
-import Portrait from "./Portrait";  
-import Recent from "./Recent";
-import Subscribe from "./components/Subscribe";
-import ShopPage from "./ShopPage/ShopPage";
+import Home from "./pages/Home";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import ShopPage from "./pages/ShopPage/ShopPage";
+import Product_Page from "./components/Product_Page";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Carousel />
-      <Shop />
-      <Wall />
-      <Portrait />
-      <Recent />
-      {/* <ShopPage/>
-      <Subscribe /> */}
+      <Router>
+        <Header />
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop">
+            <Route index element={<ShopPage />} />
+            <Route path="product" element={<Product_Page/>} />
+          </Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
