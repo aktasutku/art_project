@@ -1,6 +1,6 @@
 import React from "react";
 import "./Portrait.css";
-import portraitImg from "./assets/portrait.png";
+import portraitImg from "../../assets/portrait.png";
 
 const Portrait = () => {
   return (

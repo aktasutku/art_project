@@ -1,17 +1,17 @@
 import React from "react";
-import ShopCart from "./components/ShopCart";
+import ShopCart from "../../components/ShopCart";
 import "./Shop.css";
-import ShopImage from "./assets/Shop_side.png";
-import imageOne from "./assets/ShopCart1.png"
-import imageTwo from "./assets/ShopCart2.png"
-import imageThree from "./assets/ShopCart3.png"
+import ShopImage from "../../assets/Shop_side.png";
+import imageOne from "../../assets/ShopCart1.png"
+import imageTwo from "../../assets/ShopCart2.png"
+import imageThree from "../../assets/ShopCart3.png"
 
 const Shop = () => {
   return (
     <div className="shop">
       <div className="halfBG"></div>
       <div className="shop__image">
-        <img src={ShopImage} alt="" />
+        <img src={ShopImage} />
       </div>
       <div className="shop__cart">
         <ShopCart name={"Shop"} image={imageOne}/>

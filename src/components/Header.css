@@ -49,7 +49,7 @@
 
 .header__list ul {
   display: flex;
-  gap: 30px;
+  gap: 10px;
   justify-content: space-evenly;
   width: 100%;
   padding: 0;
@@ -64,13 +64,16 @@
   display: block;
   content: "";
   border-bottom: solid 2px var(--main-color);
-  transform: scaleX(0);
-  transition: transform 250ms ease-in-out;
+  scale: 0;
+  transition: all 250ms ease-in-out;
 }
 .header__list ul li:hover:after,
 .header__bag p:hover::after {
-  transform: scaleX(1);
+  scale: 1;
 }
+/* .borderBottom {
+  border-bottom: solid 2px var(--main-color);
+} */
 
 /* SHOPPING BAG */
 
@@ -105,8 +108,8 @@
   border: 0.5px solid var(--main-color);
   font-family: Courier, monospace;
   font-weight: 600;
-  width: 22px;
-  height: 22px;
+  width: 25px;
+  height: 25px;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -148,6 +151,7 @@
     padding: 5px 10px;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
+    background-color: var(--second-color);
   }
 
   .header__list ul li:hover {

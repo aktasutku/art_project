@@ -1,0 +1,40 @@
+.ShoppingBagPage__Item {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 20px;
+}
+.ShoppingBagPage__Item__img {
+  width: 150px;
+  height: 200px;
+  display: flex;
+}
+
+.ShoppingBagPage__Item > h2 {
+  max-width: 300px;
+  justify-content: left;
+}
+
+.ShoppingBagPage__Item__price {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-left: auto;
+}
+
+.sip__each,
+.sip__quantity,
+.sip__price {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sip__quantity > input {
+  width: 50px;
+}
+
+.sip__price > h3 {
+  display: flex;
+  justify-content: flex-end;
+}

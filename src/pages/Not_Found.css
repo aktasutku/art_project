@@ -1,0 +1,15 @@
+.notFound{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70vh;
+}
+.notFound p:first-child{
+ font-size: 100px;
+}
+.notFound p:nth-child(2){
+    font-size: 50px;
+
+}

@@ -1,3 +1,4 @@
+//Main Page element
 import React from "react";
 import "./ShopCart.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";

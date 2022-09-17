@@ -1,9 +1,9 @@
 import React from "react";
 import "./Wall.css";
-import wallone from "./assets/wall1.png";
-import walltwo from "./assets/wall2.png";
-import wallthree from "./assets/wall3.png";
-import wallfour from "./assets/wall4.png";
+import wallone from "../../assets/wall1.png";
+import walltwo from "../../assets/wall2.png";
+import wallthree from "../../assets/wall3.png";
+import wallfour from "../../assets/wall4.png";
 
 const Wall = () => {
   return (

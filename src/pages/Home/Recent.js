@@ -1,5 +1,5 @@
 import React from "react";
-import ShopCart from "./components/ShopCart";
+import ShopCart from "../../components/ShopCart";
 import "./Recent.css";
 
 const Recent = () => {

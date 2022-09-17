@@ -2,11 +2,11 @@ import React from "react";
 import "./Carousel.css";
 
 // IMAGES
-import b1 from "./assets/banner_1.png";
-import b2 from "./assets/banner_2.png";
-import b3 from "./assets/banner_3.png";
-import b4 from "./assets/banner_4.png";
-import b5 from "./assets/banner_5.png";
+import b1 from "../../assets/banner_1.png";
+import b2 from "../../assets/banner_2.png";
+import b3 from "../../assets/banner_3.png";
+import b4 from "../../assets/banner_4.png";
+import b5 from "../../assets/banner_5.png";
 
 // REACT ICONS
 import { FiYoutube } from "react-icons/fi";
