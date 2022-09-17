@@ -1,16 +1,17 @@
 import React from "react";
 import "./Footer.css";
 import CopyrightIcon from "@mui/icons-material/Copyright";
-import LocalBarIcon from "@mui/icons-material/LocalBar";
+import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 
 const Footer = () => {
+  const fontSize = 18;
   return (
     <footer className="footer">
       <div className="footer__brand">
         <p>ARSTY BUTTERCUP</p>
       </div>
       <p className="footer__division">
-        <LocalBarIcon />
+        <CloudQueueIcon sx={{ fontSize: `${fontSize}px` }} />
       </p>
 
       <div className="footer__social">
@@ -22,7 +23,7 @@ const Footer = () => {
       </div>
       {/* <p className="footer__division">/</p> */}
       <p className="footer__division">
-        <LocalBarIcon />
+        <CloudQueueIcon sx={{ fontSize: `${fontSize}px` }} />
       </p>
 
       <div className="footer__copyrights">
