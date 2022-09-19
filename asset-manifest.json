@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/art_project/static/css/main.eb0c5294.css",
+    "main.js": "/art_project/static/js/main.f9de9d94.js",
+    "static/media/Subscribe.png": "/art_project/static/media/Subscribe.3e130a64d974e57808a0.png",
+    "static/media/Recent2.png": "/art_project/static/media/Recent2.79378f59fea04859ce3b.png",
+    "static/media/ShopCart2.png": "/art_project/static/media/ShopCart2.9c80a378b918b562868a.png",
+    "static/media/Recent3.png": "/art_project/static/media/Recent3.22dd47528a53bf3525fe.png",
+    "static/media/banner_4.png": "/art_project/static/media/banner_4.9dd388feea047aba2ee0.png",
+    "static/media/Shop_side.png": "/art_project/static/media/Shop_side.d4e6572b198fe28c7875.png",
+    "static/media/ShopCart1.png": "/art_project/static/media/ShopCart1.211a1f4430ceff0656eb.png",
+    "static/media/Recent1.png": "/art_project/static/media/Recent1.3738e7ada4268765c26e.png",
+    "static/media/ShopCart3.png": "/art_project/static/media/ShopCart3.8efebb14047d4c55428c.png",
+    "static/media/banner_5.png": "/art_project/static/media/banner_5.bd71638165af32729ea2.png",
+    "static/media/portrait.png": "/art_project/static/media/portrait.9e7c664938a3dea4dd59.png",
+    "static/media/banner_2.png": "/art_project/static/media/banner_2.f7eeb4270484fe955c4e.png",
+    "static/media/banner_3.png": "/art_project/static/media/banner_3.62a6aa4d412056b6ac3e.png",
+    "static/media/banner_1.png": "/art_project/static/media/banner_1.c454c54ab68a786968b8.png",
+    "static/media/Logo.png": "/art_project/static/media/Logo.a973871078dc8e5f0be7.png",
+    "static/media/wall1.png": "/art_project/static/media/wall1.1f03f6c2a34808e32549.png",
+    "static/media/wall4.png": "/art_project/static/media/wall4.d5e0b2e9b72a971aab3d.png",
+    "static/media/wall2.png": "/art_project/static/media/wall2.348913dec396b00826da.png",
+    "static/media/wall3.png": "/art_project/static/media/wall3.5e393657792b75b6c43b.png",
+    "static/media/404.jpg": "/art_project/static/media/404.2840b1cf908b27e590c7.jpg",
+    "index.html": "/art_project/index.html",
+    "main.eb0c5294.css.map": "/art_project/static/css/main.eb0c5294.css.map",
+    "main.f9de9d94.js.map": "/art_project/static/js/main.f9de9d94.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eb0c5294.css",
+    "static/js/main.f9de9d94.js"
+  ]
+}
