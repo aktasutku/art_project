@@ -29,7 +29,7 @@ const ShoppingBagPage = () => {
   const count = useSelector((state) => state.counter.count);
   const itemTotal = useSelector((state) => state.counter.itemTotal);
 
-  const discount = count > 0 ? -25.99 : 0;
+  const discount = count > 0 ? -25.95 : 0;
   const [total, setTotal] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
 
