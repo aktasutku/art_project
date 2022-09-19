@@ -47,10 +47,15 @@
 .recent__img {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex: 2;
   gap: 10px;
   transition: all 0.5s ease-in-out;
+  height: 100%;
+}
+.recent__img  img{
+  height: 90%;
+  border-radius: 20px;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -87,5 +92,10 @@
   width: 150px;
   font-size: 1.1rem;
 
+  }
+  .recent__img  img{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
   }
 }

@@ -1,6 +1,11 @@
 import React from "react";
-import ShopCart from "../../components/ShopCart";
+import { Link } from "react-router-dom";
 import "./Recent.css";
+import Recent1 from "../../assets/Recent1.png";
+import Recent2 from "../../assets/Recent2.png";
+import Recent3 from "../../assets/Recent3.png";
+
+const recentImg = [Recent1, Recent2, Recent3];
 
 const Recent = () => {
   return (
@@ -10,12 +15,14 @@ const Recent = () => {
           Recent <br />
           Art Projects
         </p>
-        <button>View all Projects</button>
+        <Link to="portfolio">
+          <button>View all Projects</button>
+        </Link>
       </div>
       <div className="recent__img">
-        <ShopCart />
-        <ShopCart />
-        <ShopCart />
+        {recentImg.map((img) => (
+          <img src={img} />
+        ))}
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import Counter from "./app/features/counter/Counter";
 import PostsList from "./features/posts/PostsList";
 import AddPostForm from "./features/posts/AddPostForm";
 import ShoppingBagPage from "./pages/ShoppingBagPage";
+import AboutMe_Page from "./pages/AboutMe_Page";
 // import { Provider } from "react-redux";
 
 function App() {
@@ -26,9 +27,11 @@ function App() {
             <Route path="product/:id" element={<Product_Page />} />
           </Route>
           <Route path="/shopping-bag" element={<ShoppingBagPage />} />
+          <Route path="/about-me" element={<AboutMe_Page />} />
 
           <Route path="*" element={<Not_Found />} />
         </Routes>
+
         {/* <ShoppingBagPage /> */}
 
         <Footer />

@@ -110,6 +110,7 @@
   font-weight: 600;
   width: 25px;
   height: 25px;
+  font-size: 1.1rem;
 }
 
 @media only screen and (max-width: 1300px) {

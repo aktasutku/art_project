@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ShoppingBagPage.css";
 import ShoppingBagPage__Item from "../components/ShoppingBagPage__Item";
+import { useDispatch, useSelector } from "react-redux";
+import { setItemTotal } from "../app/features/counter/cartCounterSlice";
 
 // Mui Components
 import Button from "@mui/material/Button";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+// import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { useEffect } from "react";
 
 const ShoppingBagPage = () => {
   const theme = createTheme({
@@ -22,6 +25,17 @@ const ShoppingBagPage = () => {
       fontFamily: ["DynaPuff"],
     },
   });
+  const dispatch = useDispatch();
+  const count = useSelector((state) => state.counter.count);
+  const itemTotal = useSelector((state) => state.counter.itemTotal);
+
+  const discount = -25.99;
+  const [total, setTotal] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
+
+  useEffect(() => {
+    setSubTotal(total + discount);
+  }, [total, discount]);
   return (
     <div className="ShoppingBagPage">
       <div className="ShoppingBagPage__Items">
@@ -37,8 +51,8 @@ const ShoppingBagPage = () => {
       <div className="ShoppingBagPage__Checkout">
         <div className="ShoppingBagPage__Checkout__detail">
           <div className="sip__checkout">
-            <p>Items (8)</p>
-            <p>$ 53</p>
+            <p>Items ({count})</p>
+            <p>$ {itemTotal}</p>
           </div>
           <div className="sip__checkout">
             <p>Shipping</p>
@@ -46,10 +60,15 @@ const ShoppingBagPage = () => {
           </div>
           <div className="sip__checkout">
             <p>Discount</p>
-            <p>$ -25.49</p>
+            <p>$ {discount}</p>
           </div>
         </div>
-        <div className="ShoppingBagPage__Checkout__subtotal">Subtotal</div>
+        <div className="ShoppingBagPage__Checkout__subtotal">
+          <div className="sip__checkout">
+            <p>SubTotal</p>
+            <p>$ {subTotal}</p>
+          </div>
+        </div>
         <ThemeProvider theme={theme}>
           <Button
             variant="contained"

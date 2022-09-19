@@ -4,15 +4,21 @@
   gap: 10px;
   margin-top: 20px;
 }
+.ShoppingBagPage__Item_section {
+  display: flex;
+  flex-direction: row;
+}
 .ShoppingBagPage__Item__img {
   width: 150px;
   height: 200px;
   display: flex;
 }
 
-.ShoppingBagPage__Item > h2 {
+.ShoppingBagPage__Item  h2 {
+  font-weight: 400;
   max-width: 300px;
   justify-content: left;
+  height: max-content;
 }
 
 .ShoppingBagPage__Item__price {
@@ -37,4 +43,32 @@
 .sip__price > h3 {
   display: flex;
   justify-content: flex-end;
+}
+.ShoppingBagPage__Item__price h3 {
+  font-weight: 400;
+}
+
+@media only screen and (max-width: 1300px) {
+}
+
+@media only screen and (max-width: 1100px) {
+  .ShoppingBagPage__Item {
+    flex-direction: column;
+  }
+  .ShoppingBagPage__Item__price {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+}
+
+@media only screen and (max-width: 700px) {
+  .ShoppingBagPage__Item_section > h2 {
+    font-size: 20px;
+    font-weight: 400;
+  }
+}
+
+@media only screen and (max-width: 480px) {
 }

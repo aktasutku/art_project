@@ -51,7 +51,6 @@ const Product_Page = () => {
   }, [id]);
 
   //Redux
-  const count = useSelector((state) => state.counter.count);
   const dispatch = useDispatch();
 
   const handleAdd = () => {
