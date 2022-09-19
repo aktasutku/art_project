@@ -1,9 +1,9 @@
 import React from "react";
 import "./ShopPage.css";
-import Product_Card from "../../components/Product_Card";
+import Product_Card from "../components/Product_Card";
 import { Link } from "react-router-dom";
 
-const myItems = require("../../Items.json");
+const myItems = require("../Items.json");
 
 const ShopPage = () => {
   return (

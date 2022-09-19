@@ -7,7 +7,7 @@ const AboutMe_Page = () => {
       <header>Meet the Artist</header>
 
       <div className="AboutMePage_one">
-        <img src="https://images.unsplash.com/photo-1621502863666-e47e3bd2547b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" />
+        <img src="https://images.unsplash.com/photo-1617503752587-97d2103a96ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=486&q=80" />
         <div>
           <h1>Soraya Dorce</h1>
           <p>
@@ -26,18 +26,18 @@ const AboutMe_Page = () => {
             is to help every ......
           </p>
         </div>
-          <img
-            className="AboutMePage_two_imgone"
-            src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=792&q=80"
-          />
-          <img
-            className="AboutMePage_two_imgtwo"
-            src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=792&q=80"
-          />
+        <img
+          className="AboutMePage_two_imgone"
+          src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=792&q=80"
+        />
+        <img
+          className="AboutMePage_two_imgtwo"
+          src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=792&q=80"
+        />
       </div>
 
       <div className="AboutMePage_three">
-        <img src="https://images.unsplash.com/photo-1633386008252-f2d3ee603dc5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80" />
+        <img src="https://images.unsplash.com/photo-1598620616337-cb8f766489bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=443&q=80" />
         <div>
           <h1>My Art style</h1>
           <p>
