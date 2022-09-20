@@ -17,7 +17,7 @@ const AddPostForm = () => {
   const onSavePostClicked = () => {
     if (title && content) {
       dispatch(postAdded(title, content, userId));
-      setTitle("");
+      setTitle(""); 
       setContent("");
       setUserId("");
     }
