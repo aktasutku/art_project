@@ -20,8 +20,12 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
+const socialLinks = require("../../social.json");
 
 const Carousel = () => {
+  const instagramLink = socialLinks.social[0].instagram;
+  const tiktokLink = socialLinks.social[1].tiktok;
+  const youtubeLink = socialLinks.social[2].youtube;
   return (
     <div className="carousel">
       <Swiper
@@ -59,14 +63,14 @@ const Carousel = () => {
           <img src={b5} />
         </SwiperSlide>
         <div className="carousel__social">
-          <a href="https://www.instagram.com/?hl=en">
+          <a href={instagramLink}>
             <FaInstagram className="icon" size="25px" />
           </a>
-          <a href="https://www.tiktok.com/en/">
-            <FaTiktok size="25px" />
+          <a href={tiktokLink}>
+            <FaTiktok className="icon" size="25px" />
           </a>
-          <a href="https://www.youtube.com/">
-            <FiYoutube size="25px" />
+          <a href={youtubeLink}>
+            <FiYoutube className="icon" size="25px" />
           </a>
         </div>
       </Swiper>

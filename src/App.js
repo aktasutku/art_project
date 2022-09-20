@@ -32,7 +32,6 @@ function App() {
           <Route path="*" element={<Not_Found />} />
         </Routes>
 
-        {/* <ShoppingBagPage /> */}
 
         <Footer />
       </BrowserRouter>

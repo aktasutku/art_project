@@ -2,9 +2,13 @@ import React from "react";
 import "./Footer.css";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
+const socialLinks = require("../social.json");
 
 const Footer = () => {
   const fontSize = 18;
+  const instagramLink = socialLinks.social[0].instagram;
+  const tiktokLink = socialLinks.social[1].tiktok;
+  const youtubeLink = socialLinks.social[2].youtube;
   return (
     <footer className="footer">
       <div className="footer__brand">
@@ -15,11 +19,11 @@ const Footer = () => {
       </p>
 
       <div className="footer__social">
-        <a href="">Instagram</a>
+        <a href={instagramLink}>Instagram</a>
         <p className="footer__division">|</p>
-        <a href="">Tiktok</a>
+        <a href={tiktokLink}>Tiktok</a>
         <p className="footer__division">|</p>
-        <a href="">Youtube</a>
+        <a href={youtubeLink}>Youtube</a>
       </div>
       {/* <p className="footer__division">/</p> */}
       <p className="footer__division">

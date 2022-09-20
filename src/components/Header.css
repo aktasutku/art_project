@@ -71,9 +71,9 @@
 .header__bag p:hover::after {
   scale: 1;
 }
-/* .borderBottom {
+.active {
   border-bottom: solid 2px var(--main-color);
-} */
+}
 
 /* SHOPPING BAG */
 

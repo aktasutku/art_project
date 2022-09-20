@@ -84,6 +84,9 @@
     border-radius: 50px;
     gap: 10px;
   }
+  .halfBG {
+    height: 90%;
+  }
 }
 
 @media only screen and (max-width: 475px) {
@@ -93,5 +96,8 @@
   .shop__cart {
     padding: 20px 0;
     border-radius: 20px;
+  }
+  .halfBG {
+    height: 80%;
   }
 }
