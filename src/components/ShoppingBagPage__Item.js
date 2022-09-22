@@ -8,17 +8,23 @@ import {
 } from "../app/features/counter/cartCounterSlice";
 // import {  } from "../app/features/counter/cartCounterSlice";
 
-const ShoppingBagPage__Item = () => {
+const ShoppingBagPage__Item = ({
+  title,
+  eachPrice,
+  qty,
+  totalPrice,
+  itemImg,
+}) => {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.counter.count);
 
-  const each = 99;
-  const [total, setTotal] = useState();
+  // const each = 99;
+  // const [total, setTotal] = useState();
 
   //set total
-  useEffect(() => {
-    setTotal(count * each);
-  }, [count]);
+  // useEffect(() => {
+  //   setTotal(count * each);
+  // }, [count]);
 
   const handleChange = (e) => {
     dispatch(setCount(e.target.value));
@@ -27,20 +33,20 @@ const ShoppingBagPage__Item = () => {
     <div className="ShoppingBagPage__Item">
       <div className="ShoppingBagPage__Item_section">
         <div className="ShoppingBagPage__Item__img">
-          <img src="https://images.unsplash.com/photo-1618042164219-62c820f10723?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" />
+          <img src={itemImg} />
         </div>
-        <h2>TitleTitle</h2>
+        <h2>{title}</h2>
       </div>
       <div className="ShoppingBagPage__Item__price">
         <div className="sip__each">
           <h3>Each</h3>
-          <p>$ {each}</p>
+          <p>$ {eachPrice}</p>
         </div>
         <div className="sip__quantity">
           <h3>Quantity</h3>
           <input
             type="number"
-            defaultValue={count}
+            defaultValue={qty}
             min={0}
             onChange={handleChange}
           />
@@ -48,7 +54,7 @@ const ShoppingBagPage__Item = () => {
 
         <div className="sip__price">
           <h3>Total</h3>
-          <p>$ {total}</p>
+          <p>$ {totalPrice}</p>
         </div>
       </div>
     </div>

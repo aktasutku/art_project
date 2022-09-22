@@ -4,42 +4,36 @@ import Logo from "../assets/Logo.png";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { AiOutlineMenu } from "react-icons/ai";
 import "animate.css";
-import social from "../social.json"
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  NavLink,
-} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+import { selectAllCartItems } from "../app/features/cartItem/cartItemSlice";
 
 const Header = () => {
   //Redux
-  const count = useSelector((state) => state.counter.count);
-
+  const cartItems = useSelector(selectAllCartItems);
   const [display, setDisplay] = useState(false);
-  const [shoppingBag, setShoppingBag] = useState(0);
-  const [selected, setSelected] = useState(false);
-  useEffect(() => {
-    setShoppingBag(count);
-  }, [count]);
+  let totalItemsQty = 0;
 
-  const handleClick = () => {
-    setDisplay((display) => !display);
-  };
+  cartItems.map((item) => {
+    totalItemsQty += Number(item.qty);
+  });
 
-//  social.map(s=>{
-//   console.log(s)
-//  })
+  // this was belong to <AiOutlineMenu />'s div onclick
+  // const handleClick = () => {
+  //   setDisplay((display) => !display);
+  // };
 
   return (
     <div className="header">
       <div className="header__img">
         <img src={Logo} />
       </div>
-      <div className="header__menu " onClick={() => handleClick()}>
+      <div
+        className="header__menu "
+        onClick={() => setDisplay((display) => !display)}
+      >
         <AiOutlineMenu />
       </div>
       <div
@@ -83,9 +77,9 @@ const Header = () => {
       <div className="header__bag">
         <div className="header__bag__container">
           <MdOutlineShoppingBag className="header__bag__icon" />
-          {shoppingBag > 0 && (
+          {totalItemsQty > 0 && (
             <div className="header__bag__number  animate__animated animate__bounce">
-              {shoppingBag}
+              {totalItemsQty}
             </div>
           )}
         </div>

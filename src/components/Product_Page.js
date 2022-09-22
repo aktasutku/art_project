@@ -15,6 +15,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { addValue } from "../app/features/counter/cartCounterSlice";
+import {
+  addItemtoCart,
+  selectAllCartItems,
+} from "../app/features/cartItem/cartItemSlice";
 
 //React Router
 import { useParams } from "react-router-dom";
@@ -40,8 +44,13 @@ const Product_Page = () => {
 
   const [detailData, setDetailData] = useState({});
   const [qty, setQty] = useState(0);
+  let total = qty * detailData.price;
 
-  //Bring the item data by the id
+  //Redux
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectAllCartItems);
+
+  //Bring the item by the id
   useEffect(() => {
     myItems.items.map((item) => {
       if (item.id == id) {
@@ -50,14 +59,21 @@ const Product_Page = () => {
     });
   }, [id]);
 
-  //Redux
-  const dispatch = useDispatch();
-
   const handleAdd = () => {
     dispatch(addValue(qty));
     setQty(0);
+    qty > 0 &&
+      dispatch(
+        addItemtoCart(
+          detailData.id,
+          detailData.title,
+          detailData.price,
+          qty,
+          total,
+          detailData.images[0].src
+        )
+      );
   };
-
   return (
     <div className="product__page">
       <div className="productPage__image">

@@ -3,6 +3,7 @@ import "./ShoppingBagPage.css";
 import ShoppingBagPage__Item from "../components/ShoppingBagPage__Item";
 import { useDispatch, useSelector } from "react-redux";
 import { setItemTotal } from "../app/features/counter/cartCounterSlice";
+import { selectAllCartItems } from "../app/features/cartItem/cartItemSlice";
 
 // Mui Components
 import Button from "@mui/material/Button";
@@ -26,16 +27,20 @@ const ShoppingBagPage = () => {
     },
   });
   const dispatch = useDispatch();
-  const count = useSelector((state) => state.counter.count);
-  const itemTotal = useSelector((state) => state.counter.itemTotal);
+  const cartItems = useSelector(selectAllCartItems);
 
-  const discount = count > 0 ? -25.95 : 0;
-  const [total, setTotal] = useState(0);
-  const [subTotal, setSubTotal] = useState(0);
+  let totalItemsQty = 0;
+  let itemsTotalCost = 0;
+  let subTotal = 0;
 
-  useEffect(() => {
-    setSubTotal(total + discount);
-  }, [total, discount]);
+  cartItems.map((item) => {
+    totalItemsQty += Number(item.qty);
+    itemsTotalCost += item.total;
+  });
+  //dont take this top of the mapped cartItems
+  const discount = totalItemsQty > 0 ? -25.95 : 0;
+  subTotal = itemsTotalCost + discount;
+
   return (
     <div className="ShoppingBagPage">
       <div className="ShoppingBagPage__Items">
@@ -44,15 +49,26 @@ const ShoppingBagPage = () => {
           My Cart
         </h1>
         {/* when you map include hr too */}
-        <hr />
-        <ShoppingBagPage__Item />
+        {cartItems.map((item) => {
+          return (
+            /* <hr /> */
+            <ShoppingBagPage__Item
+              key={item.id}
+              title={item.title}
+              eachPrice={item.eachPrice}
+              qty={item.qty}
+              totalPrice={item.total}
+              itemImg={item.img}
+            />
+          );
+        })}
       </div>
 
       <div className="ShoppingBagPage__Checkout">
         <div className="ShoppingBagPage__Checkout__detail">
           <div className="sip__checkout">
-            <p>Items ({count})</p>
-            <p>$ {itemTotal}</p>
+            <p>Items ({totalItemsQty})</p>
+            <p>$ {itemsTotalCost}</p>
           </div>
           <div className="sip__checkout">
             <p>Shipping</p>
