@@ -4,9 +4,10 @@
   gap: 10px;
   margin-top: 20px;
 }
-.ShoppingBagPage__Item_section {
+.ShoppingBagPage__Item__section {
   display: flex;
   flex-direction: row;
+  gap: 10px;
 }
 .ShoppingBagPage__Item__img {
   width: 150px;
@@ -14,7 +15,7 @@
   display: flex;
 }
 
-.ShoppingBagPage__Item  h2 {
+.ShoppingBagPage__Item__section > h2 {
   font-weight: 400;
   max-width: 300px;
   justify-content: left;
@@ -39,6 +40,9 @@
 .sip__quantity > input {
   width: 50px;
 }
+.sip__price > button {
+  margin-top: auto;
+}
 
 .sip__price > h3 {
   display: flex;
@@ -48,8 +52,8 @@
   font-weight: 400;
 }
 
-@media only screen and (max-width: 1300px) {
-}
+/* @media only screen and (max-width: 1300px) {
+} */
 
 @media only screen and (max-width: 1100px) {
   .ShoppingBagPage__Item {
@@ -60,11 +64,11 @@
   }
 }
 
-@media only screen and (max-width: 900px) {
-}
+/* @media only screen and (max-width: 900px) {
+} */
 
 @media only screen and (max-width: 700px) {
-  .ShoppingBagPage__Item_section > h2 {
+  .ShoppingBagPage__Item__section > h2 {
     font-size: 20px;
     font-weight: 400;
   }

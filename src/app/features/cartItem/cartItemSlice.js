@@ -9,13 +9,6 @@ const cartSlice = createSlice({
     addItemtoCart: {
       reducer(state, action) {
         state.push(action.payload);
-        // state.map((item) => {
-        //   if (item.id === action.payload.id) {
-        //     let index = state.cartItems.indexOf(item);
-        //     console.log(index);
-        //   } else {
-        //     state.push(action.payload);
-        //   }
       },
       prepare(id, title, eachPrice, qty, total, img) {
         return {
@@ -30,11 +23,35 @@ const cartSlice = createSlice({
         };
       },
     },
+    updateExistingCartItemQty: {
+      reducer(state, action) {
+        state = state.map((item) => {
+          if (item.id === action.payload.id) {
+            item.qty = action.payload.qty;
+            item.total = action.payload.total;
+          }
+        });
+      },
+      prepare(id, qty, total) {
+        return {
+          payload: {
+            id,
+            qty,
+            total,
+          },
+        };
+      },
+    },
+    removeCartItem: (state, action) => {
+      // state = state.filter((item) => item !== action.payload.id);
+      return state.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
 export const selectAllCartItems = (state) => state.cartItems;
 
-export const { addItemtoCart } = cartSlice.actions;
+export const { addItemtoCart, updateExistingCartItemQty, removeCartItem } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

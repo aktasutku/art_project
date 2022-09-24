@@ -1,37 +1,47 @@
 import React, { useEffect } from "react";
 import "./ShoppingBagPage__Item.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+//MUI
+import Button from "@mui/material/Button";
+import { ThemeProvider } from "@mui/material/styles";
+
 import {
-  setCount,
-  setItemTotal,
-} from "../app/features/counter/cartCounterSlice";
+  updateExistingCartItemQty,
+  selectAllCartItems,
+  removeCartItem,
+} from "../app/features/cartItem/cartItemSlice";
+import { useState } from "react";
 // import {  } from "../app/features/counter/cartCounterSlice";
 
 const ShoppingBagPage__Item = ({
+  id,
   title,
   eachPrice,
   qty,
   totalPrice,
   itemImg,
+  theme,
 }) => {
   const dispatch = useDispatch();
-  const count = useSelector((state) => state.counter.count);
+  const cartItems = useSelector(selectAllCartItems);
+  const [itemQty, setItemQty] = useState(qty);
+  const [total, setTotal] = useState(totalPrice);
 
-  // const each = 99;
-  // const [total, setTotal] = useState();
+  useEffect(() => {
+    setTotal(itemQty * eachPrice);
+  }, [itemQty]);
 
-  //set total
-  // useEffect(() => {
-  //   setTotal(count * each);
-  // }, [count]);
-
-  const handleChange = (e) => {
-    dispatch(setCount(e.target.value));
+  const handleUpdate = () => {
+    dispatch(updateExistingCartItemQty(id, itemQty, total));
   };
+
+  const handleRemove = () => {
+    dispatch(removeCartItem(id));
+  };
+
   return (
     <div className="ShoppingBagPage__Item">
-      <div className="ShoppingBagPage__Item_section">
+      <div className="ShoppingBagPage__Item__section">
         <div className="ShoppingBagPage__Item__img">
           <img src={itemImg} />
         </div>
@@ -46,15 +56,47 @@ const ShoppingBagPage__Item = ({
           <h3>Quantity</h3>
           <input
             type="number"
-            defaultValue={qty}
+            defaultValue={itemQty}
             min={0}
-            onChange={handleChange}
+            onChange={(e) => setItemQty(e.target.value)}
           />
+          <ThemeProvider theme={theme}>
+            <Button
+              variant="contained"
+              onClick={handleUpdate}
+              sx={{
+                color: "#FFF",
+                letterSpacing: 2,
+                fontSize: 12,
+                fontWeight: 400,
+                padding: 0,
+                "&:hover": { backgroundColor: "#FFF", color: "#FB8712" },
+              }}
+            >
+              Update
+            </Button>
+          </ThemeProvider>
         </div>
 
         <div className="sip__price">
           <h3>Total</h3>
-          <p>$ {totalPrice}</p>
+          <p>$ {total}</p>
+          <ThemeProvider theme={theme}>
+            <Button
+              variant="contained"
+              onClick={handleRemove}
+              sx={{
+                color: "#FFF",
+                letterSpacing: 2,
+                fontSize: 12,
+                fontWeight: 400,
+                padding: 0,
+                "&:hover": { backgroundColor: "#FFF", color: "#FB8712" },
+              }}
+            >
+              Remove
+            </Button>
+          </ThemeProvider>
         </div>
       </div>
     </div>

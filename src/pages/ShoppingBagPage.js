@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ShoppingBagPage.css";
 import ShoppingBagPage__Item from "../components/ShoppingBagPage__Item";
 import { useDispatch, useSelector } from "react-redux";
-import { setItemTotal } from "../app/features/counter/cartCounterSlice";
 import { selectAllCartItems } from "../app/features/cartItem/cartItemSlice";
 
 // Mui Components
@@ -10,7 +9,6 @@ import Button from "@mui/material/Button";
 // import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { useEffect } from "react";
 
 const ShoppingBagPage = () => {
   const theme = createTheme({
@@ -51,15 +49,19 @@ const ShoppingBagPage = () => {
         {/* when you map include hr too */}
         {cartItems.map((item) => {
           return (
-            /* <hr /> */
-            <ShoppingBagPage__Item
-              key={item.id}
-              title={item.title}
-              eachPrice={item.eachPrice}
-              qty={item.qty}
-              totalPrice={item.total}
-              itemImg={item.img}
-            />
+            <>
+              <hr />
+              <ShoppingBagPage__Item
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                eachPrice={item.eachPrice}
+                qty={item.qty}
+                totalPrice={item.total}
+                itemImg={item.img}
+                theme={theme}
+              />
+            </>
           );
         })}
       </div>
