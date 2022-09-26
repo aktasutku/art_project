@@ -21,10 +21,13 @@ const PortfolioPage = () => {
   const [singleItem, setSingleItem] = useState({});
 
   const handleOpenWide = (e) => {
-    console.log(e.target.id);
     setId(e.target.id);
+    setSingleItem(
+      portfolio.portfolioItemData.find((item) => item.id == e.target.id)
+    );
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -33,25 +36,28 @@ const PortfolioPage = () => {
     let itemIndex = 0;
     if (e.target.className.baseVal.includes("openWide_right")) {
       itemIndex = portfolio.portfolioItemData.indexOf(singleItem);
-      itemIndex += 1;
-      singleItem = portfolio.portfolioItemData[itemIndex];
-      console.log(singleItem.id);
+      if (itemIndex < portfolio.portfolioItemData.length-1) {
+        itemIndex += 1;
+      }
+      setSingleItem(portfolio.portfolioItemData[itemIndex]);
     } else {
-      itemIndex -= 1;
-      singleItem = portfolio.portfolioItemData[itemIndex];
-      console.log(singleItem.img);
+      itemIndex = portfolio.portfolioItemData.indexOf(singleItem);
+      if (itemIndex > 0) {
+        itemIndex -= 1;
+      }
+      setSingleItem(portfolio.portfolioItemData[itemIndex]);
     }
   };
 
   const OpenWide = () => {
     // singleItem = portfolio.portfolioItemData.find((item) => item.id == itemId);
 
-    useEffect(() => {
-      setSingleItem(portfolio.portfolioItemData.find((item) => item.id == id));
-    }, [id]);
+    // useEffect(() => {
+    //   setSingleItem(portfolio.portfolioItemData.find((item) => item.id == id));
+    // });
 
     return (
-      <div className={open ? "openWide_none":"openWide"}>
+      <div className={open ? "openWide" : "openWide_none"}>
         <div className="openWide_img">
           <CloseIcon className="openWide_closeIcon" onClick={handleClose} />
           <img
@@ -96,7 +102,7 @@ const PortfolioPage = () => {
         </ImageList>
       </Box>
       {/* {open && OpenWide()} */}
-      <OpenWide />
+      {open && <OpenWide />}
     </div>
   );
 };
