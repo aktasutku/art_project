@@ -9,6 +9,8 @@ const Footer = () => {
   const instagramLink = socialLinks.social[0].instagram;
   const tiktokLink = socialLinks.social[1].tiktok;
   const youtubeLink = socialLinks.social[2].youtube;
+
+  const year = new Date().getFullYear();
   return (
     <footer className="footer">
       <div className="footer__brand">
@@ -34,7 +36,7 @@ const Footer = () => {
         <div>
           <CopyrightIcon />
           <p>
-            Copy Rights <u>Utku Aktas</u>
+            Copy Rights {year} <u>Utku Aktas</u>
           </p>
         </div>
         <p>All Rights Reserved</p>

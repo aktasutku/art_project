@@ -1,15 +1,14 @@
-.App{
+.App {
   max-width: 1800px;
   margin: 0 auto;
-  background-color: #FDF2DA;
-  color: #FB8712;
+  background-color: #fdf2da;
+  color: #fb8712;
 }
-:root{
-  --main-color:#FB8712;
-  --second-color:#FDF2DA;
+:root {
+  --main-color: #fb8712;
+  --second-color: #fdf2da;
+  --header-height: 80px;
 }
-
-
 
 @media only screen and (max-width: 1300px) {
 }

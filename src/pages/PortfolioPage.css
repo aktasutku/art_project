@@ -1,0 +1,103 @@
+.portfolioPage {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.portfolioPage_header {
+  width: 100%;
+  background-color: var(--main-color);
+  height: max-content;
+  padding: 20px;
+  font-size: 4.5rem;
+  color: var(--second-color);
+  text-align: center;
+  transition: all ease-in-out 300ms;
+}
+.openWide {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 1;
+}
+.openWide_none {
+  opacity: 0;
+}
+.openWide_img {
+  position: sticky;
+  top: var(--header-height);
+  width: 100%;
+  height: 100vh;
+  border: 3px solid orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+.openWide_img > img {
+  object-fit: contain;
+  max-width: 90%;
+  height: auto;
+  max-height: 94%;
+}
+
+.openWide_closeIcon {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  font-size: 40px !important;
+  cursor: pointer;
+  z-index: 999;
+}
+.openWide_right,
+.openWide_left {
+  position: absolute;
+  font-size: 40px !important;
+  opacity: 0.5;
+  cursor: pointer;
+  margin: auto 0;
+}
+.openWide_right:hover,
+.openWide_left:hover {
+  opacity: 1;
+}
+.openWide_right {
+  right: 10px;
+}
+.openWide_left {
+  left: 10px;
+}
+
+@media only screen and (max-width: 1300px) {
+}
+
+@media only screen and (max-width: 1100px) {
+  .MuiImageList-root {
+    column-count: 4 !important;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .MuiImageList-root {
+    column-count: 3 !important;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .portfolioPage_header {
+    font-size: 2.2rem;
+  }
+  .openWide_closeIcon {
+    top: 20px;
+    right: 30px;
+    font-size: 40px !important;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .MuiImageList-root {
+    column-count: 2 !important;
+  }
+}
