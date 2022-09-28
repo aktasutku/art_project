@@ -15,7 +15,7 @@ const Recent = () => {
           Recent <br />
           Art Projects
         </p>
-        <Link to="portfolio">
+        <Link to="/portfolio">
           <button>View all Projects</button>
         </Link>
       </div>

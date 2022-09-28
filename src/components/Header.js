@@ -35,7 +35,7 @@ const Header = () => {
         }
       >
         <ul className="animate__animated animate__fadeInLeft">
-          <NavLink activeclassname="active" to="/">
+          <NavLink activeclassname="active" to="/art_project">
             <li onClick={() => setDisplay(false)}>Home</li>
           </NavLink>
           <NavLink activeclassname="active" to="shop">

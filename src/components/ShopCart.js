@@ -8,7 +8,7 @@ const ShopCart = (props) => {
 
   return (
     <div className="shopCart">
-      <Link to={link}>
+      <Link to={`/${link}`}>
         <img src={props.image} />
         <button>{props.name}</button>
       </Link>
