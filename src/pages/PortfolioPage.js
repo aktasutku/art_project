@@ -10,21 +10,35 @@ import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOu
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 //Animate.css
 import "animate.css";
+//Firebase
+import { portfolioItemsCol } from "../firebase";
+import { getDocs } from "firebase/firestore/lite";
 
 //Images jSON
-const portfolio = require("../portfolioItems.json");
+// const portfolio = require("../portfolioItems.json");
+// portfolio.portfolioItemData.map(()=>) if you want to switch to json file
 
 const PortfolioPage = () => {
-  const [id, setId] = useState();
   const [open, setOpen] = useState(false);
-  //   let singleItem = {};
   const [singleItem, setSingleItem] = useState({});
+  const [portfolioItems, setPortfolioItems] = useState([]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  //Set Firebase Data
+  useEffect(() => {
+    const getPortfolioItems = async () => {
+      const firestoreData = await getDocs(portfolioItemsCol);
+      setPortfolioItems(
+        firestoreData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
+    getPortfolioItems();
+  }, []);
 
   const handleOpenWide = (e) => {
-    setId(e.target.id);
-    setSingleItem(
-      portfolio.portfolioItemData.find((item) => item.id == e.target.id)
-    );
+    setSingleItem(portfolioItems.find((item) => item.id == e.target.id));
     setOpen(true);
   };
 
@@ -32,30 +46,25 @@ const PortfolioPage = () => {
     setOpen(false);
   };
 
+  //******************************************** */
   const handleNavigation = (e) => {
     let itemIndex = 0;
     if (e.target.className.baseVal.includes("openWide_right")) {
-      itemIndex = portfolio.portfolioItemData.indexOf(singleItem);
-      if (itemIndex < portfolio.portfolioItemData.length-1) {
+      itemIndex = portfolioItems.indexOf(singleItem);
+      if (itemIndex < portfolioItems.length - 1) {
         itemIndex += 1;
       }
-      setSingleItem(portfolio.portfolioItemData[itemIndex]);
+      setSingleItem(portfolioItems[itemIndex]);
     } else {
-      itemIndex = portfolio.portfolioItemData.indexOf(singleItem);
+      itemIndex = portfolioItems.indexOf(singleItem);
       if (itemIndex > 0) {
         itemIndex -= 1;
       }
-      setSingleItem(portfolio.portfolioItemData[itemIndex]);
+      setSingleItem(portfolioItems[itemIndex]);
     }
   };
-
+  //******************************************** */
   const OpenWide = () => {
-    // singleItem = portfolio.portfolioItemData.find((item) => item.id == itemId);
-
-    // useEffect(() => {
-    //   setSingleItem(portfolio.portfolioItemData.find((item) => item.id == id));
-    // });
-
     return (
       <div className={open ? "openWide" : "openWide_none"}>
         <div className="openWide_img">
@@ -76,7 +85,7 @@ const PortfolioPage = () => {
       </div>
     );
   };
-
+  //******************************************** */
   return (
     <div className="portfolioPage">
       <div className="portfolioPage_header">My Artworks</div>
@@ -88,7 +97,8 @@ const PortfolioPage = () => {
         }}
       >
         <ImageList variant="masonry" cols={5} gap={8}>
-          {portfolio.portfolioItemData.map((item) => (
+          {/* {portfolio.portfolioItemData.map((item) => ( */}
+          {portfolioItems.map((item) => (
             <ImageListItem key={item.id}>
               <img
                 id={item.id}
@@ -101,7 +111,6 @@ const PortfolioPage = () => {
           ))}
         </ImageList>
       </Box>
-      {/* {open && OpenWide()} */}
       {open && <OpenWide />}
     </div>
   );

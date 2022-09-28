@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Header.css";
 import Logo from "../assets/Logo.png";
 import { MdOutlineShoppingBag } from "react-icons/md";
@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { selectAllCartItems } from "../app/features/cartItem/cartItemSlice";
+import { useEffect } from "react";
 
 const Header = () => {
   //Redux
@@ -20,20 +21,12 @@ const Header = () => {
     totalItemsQty += Number(item.qty);
   });
 
-  // this was belong to <AiOutlineMenu />'s div onclick
-  // const handleClick = () => {
-  //   setDisplay((display) => !display);
-  // };
-
   return (
     <div className="header">
       <div className="header__img">
         <img src={Logo} />
       </div>
-      <div
-        className="header__menu "
-        onClick={() => setDisplay((display) => !display)}
-      >
+      <div className="header__menu " onClick={() => setDisplay(() => !display)}>
         <AiOutlineMenu />
       </div>
       <div
@@ -42,36 +35,24 @@ const Header = () => {
         }
       >
         <ul className="animate__animated animate__fadeInLeft">
-          <li>
-            <NavLink activeClassName="active" to="/">
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName="active" to="shop">
-              Shop
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName="active" to="customized-portrait">
-              Customized Portrait
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName="active" to="portfolio">
-              Portfolio
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName="active" to="about-me">
-              About Me
-            </NavLink>
-          </li>
-          <li>
-            <NavLink activeClassName="active" to="behind-the-scenes">
-              Behind the Scenes
-            </NavLink>
-          </li>
+          <NavLink activeclassname="active" to="/">
+            <li onClick={() => setDisplay(false)}>Home</li>
+          </NavLink>
+          <NavLink activeclassname="active" to="shop">
+            <li onClick={() => setDisplay(false)}>Shop</li>
+          </NavLink>
+          <NavLink activeclassname="active" to="customized-portrait">
+            <li onClick={() => setDisplay(false)}>Customized Portrait</li>
+          </NavLink>
+          <NavLink activeclassname="active" to="portfolio">
+            <li onClick={() => setDisplay(false)}>Portfolio</li>
+          </NavLink>
+          <NavLink activeclassname="active" to="about-me">
+            <li onClick={() => setDisplay(false)}>About Me</li>
+          </NavLink>
+          <NavLink activeclassname="active" to="behind-the-scenes">
+            <li onClick={() => setDisplay(false)}>Behind the Scenes</li>
+          </NavLink>
         </ul>
       </div>
       <div className="header__bag">
@@ -84,7 +65,7 @@ const Header = () => {
           )}
         </div>
         <p>
-          <NavLink activeClassName="active" to="/shopping-bag">
+          <NavLink activeclassname="active" to="/shopping-bag">
             Shopping Bag
           </NavLink>
         </p>

@@ -1,7 +1,7 @@
 import "./App.css";
 
 import Header from "./components/Header";
-import Home from "./pages/Home";
+import Home from "./pages/Home_Page";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ShopPage from "./pages/ShopPage";
 import Product_Page from "./components/Product_Page";

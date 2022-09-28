@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./Product_Page.css";
-
 // Import Swiper React components -- Import Swiper styles
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, Mousewheel, Pagination, A11y, EffectFade } from "swiper";
-
 // Mui Components
 import Button from "@mui/material/Button";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 // import { addValue } from "../app/features/counter/cartCounterSlice";
@@ -20,11 +18,12 @@ import {
   updateExistingCartItemQty,
   selectAllCartItems,
 } from "../app/features/cartItem/cartItemSlice";
-
+//FIREBASE
+import { shopItemsCol } from "../firebase";
+import { doc, getDoc } from "firebase/firestore/lite";
 //React Router
 import { useParams } from "react-router-dom";
-const myItems = require("../Items.json");
-
+// const myItems = require("../Items.json");
 //Mui Palette
 const theme = createTheme({
   palette: {
@@ -43,33 +42,43 @@ const theme = createTheme({
 const Product_Page = () => {
   const { id } = useParams();
 
-  const [currentData, setCurrentData] = useState({});
+  const [currentData, setCurrentData] = useState([]);
   const [qty, setQty] = useState(0);
-  let total = qty * currentData.price;
-
+  let total = qty * (currentData.price - currentData.discount);
   //Redux
   const dispatch = useDispatch();
   const cartItems = useSelector(selectAllCartItems);
+  const [discountedPrice, setDiscountedPrice] = useState(0);
+
+  //fetch data from Firebase for shopItems
+  useEffect(() => {
+    const getShopItem = async () => {
+      const docRef = doc(shopItemsCol, id);
+      const fireStoreData = await getDoc(docRef);
+      // console.log(fireStoreData.data());
+      setCurrentData({ ...fireStoreData.data(), id: id });
+      setDiscountedPrice(
+        fireStoreData.data().price - fireStoreData.data().discount
+      );
+    };
+    getShopItem();
+  }, []);
 
   //Bring the item by the id
-  useEffect(() => {
-    myItems.items.map((item) => {
-      if (item.id == id) {
-      setCurrentData(item)
-      }
-  });
-  }, [id]);
+  // useEffect(() => {
+  //   for json file
+  //   myItems.items.map((item) => {
+  //   shopItem.find((item) => {
+  //     if (item.id == id) {
+  //       setCurrentData(item);
+  //     }
+  //   });
+  // }, [id]);
 
   const handleAdd = () => {
     if (qty > 0) {
       if (Boolean(cartItems.find((item) => item.id === currentData.id))) {
-        dispatch(
-          updateExistingCartItemQty(
-            currentData.id,
-            qty,
-            total,
-          )
-        );
+        dispatch(updateExistingCartItemQty(currentData.id, qty, total));
       } else {
         dispatch(
           addItemtoCart(
@@ -78,7 +87,9 @@ const Product_Page = () => {
             currentData.price,
             qty,
             total,
-            currentData.images[0].src
+            currentData.images[0],
+            currentData.discount,
+            discountedPrice
           )
         );
       }
@@ -86,6 +97,7 @@ const Product_Page = () => {
 
     setQty(0);
   };
+
   return (
     <div className="product__page">
       <div className="productPage__image">
@@ -100,16 +112,28 @@ const Product_Page = () => {
           navigation
           className="carousel__swiper"
         >
-          {currentData?.images?.map((item) => (
-            <SwiperSlide>
-              <img src={item.src} key={item.src} />
+          {currentData?.images?.map((image) => (
+            <SwiperSlide key={image}>
+              <img src={image} />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
       <div className="productPage__information">
         <h1>{currentData.title}</h1>
-        <h2>$ {currentData.price}</h2>
+        <div className="productPage__information__price">
+          {currentData.discount > 0 ? (
+            <>
+              <h2 className="strikethrough ">$ {currentData.price}</h2>
+              <ArrowRightAltIcon />
+              <h2 className="productPage__information__discountedPrice">
+                $ {discountedPrice}
+              </h2>
+            </>
+          ) : (
+            <h2>$ {currentData.price}</h2>
+          )}
+        </div>
         <div className="productPage__information__Quantity">
           <p>Qty : </p>
           <input

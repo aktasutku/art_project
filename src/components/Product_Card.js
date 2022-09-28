@@ -1,18 +1,15 @@
 import React from "react";
 import "./Product_Card.css";
-
 // Animete css
 import "animate.css";
-
 // Import Swiper React components -- Import Swiper styles
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, A11y, EffectFade, Mousewheel } from "swiper";
 
-const Product_Card = ({ title, price, description, images, key }) => {
+const Product_Card = ({ title, price, description, images }) => {
   return (
-    // <Link to="product">
     <div className="productCard">
       <div className="productCard__image">
         <Swiper
@@ -25,9 +22,9 @@ const Product_Card = ({ title, price, description, images, key }) => {
           navigation
           className="carousel__swiper"
         >
-          {images.map((item) => (
-            <SwiperSlide>
-              <img src={item.src} key={item.src} alt=""/>
+          {images.map((image) => (
+            <SwiperSlide key={image}>
+              <img src={image} alt="" />
             </SwiperSlide>
           ))}
         </Swiper>

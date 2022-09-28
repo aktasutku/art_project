@@ -134,6 +134,10 @@
   .header__list {
     flex: 0;
   }
+  .header__list ul li:hover:after,
+  .header__bag p:hover::after {
+    scale: 0;
+  }
   .header__list__none {
     opacity: 0;
     display: none;
@@ -141,7 +145,7 @@
   .header__list ul {
     position: absolute;
     left: 0;
-    top: 80px;
+    top: var(--header-height);
     width: max-content;
     flex-direction: column;
     background-color: var(--main-color);

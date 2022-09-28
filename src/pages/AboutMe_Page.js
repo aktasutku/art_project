@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./AboutMe_Page.css";
 
 const AboutMe_Page = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div className="AboutMe_Page">
       <header>Meet the Artist</header>

@@ -30,14 +30,16 @@ const ShoppingBagPage = () => {
   let totalItemsQty = 0;
   let itemsTotalCost = 0;
   let subTotal = 0;
+  let discount = 0;
 
   cartItems.map((item) => {
     totalItemsQty += Number(item.qty);
-    itemsTotalCost += item.total;
+    itemsTotalCost += item.eachPrice * item.qty;
+    discount += item.discount * item.qty;
   });
   //dont take this top of the mapped cartItems
-  const discount = totalItemsQty > 0 ? -25.95 : 0;
-  subTotal = itemsTotalCost + discount;
+
+  subTotal = itemsTotalCost - discount;
 
   return (
     <div className="ShoppingBagPage">
@@ -78,7 +80,7 @@ const ShoppingBagPage = () => {
           </div>
           <div className="sip__checkout">
             <p>Discount</p>
-            <p>$ {discount}</p>
+            <p>$ {discount * -1}</p>
           </div>
         </div>
         <div className="ShoppingBagPage__Checkout__subtotal">

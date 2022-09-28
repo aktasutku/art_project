@@ -21,7 +21,7 @@ const Recent = () => {
       </div>
       <div className="recent__img">
         {recentImg.map((img) => (
-          <img src={img} />
+          <img src={img} key={img}/>
         ))}
       </div>
     </div>

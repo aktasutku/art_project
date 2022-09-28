@@ -13,6 +13,9 @@
   text-align: center;
   transition: all ease-in-out 300ms;
 }
+.portfolioPage  img{
+  cursor: pointer;
+}
 .openWide {
   position: absolute;
   inset: 0;
