@@ -13,6 +13,7 @@ const Shop = () => {
       <div className="shop__image">
         <img src={ShopImage} />
       </div>
+
       <div className="shop__cart">
         <ShopCart name={"Shop"} image={imageOne} />
         <ShopCart name={"Customized Portrait"} image={imageTwo} />

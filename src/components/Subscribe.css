@@ -34,30 +34,6 @@
   line-height: 1.7rem;
 }
 
-/* .subscribe__comment input {
-  outline: none;
-  width: 400px;
-  height: 40px;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  padding: 0 10px;
-}
-.subscribe__comment button {
-  width: 200px;
-  height: 40px;
-  border: none;
-  border-radius: 10px;
-  background-color: var(--main-color);
-  color: white;
-  font-size: 1.3rem;
-  cursor: pointer;
-} */
-
-/* .subscribe__comment button:hover {
-  background-color: whitesmoke;
-  color: var(--main-color);
-} */
-
 @media only screen and (max-width: 1300px) {
   .subscribe {
     padding: 10px 0;
@@ -81,16 +57,26 @@
   .subscribe__img {
     display: none;
   }
-  .subscribe{
+  .subscribe {
     padding-left: 50px;
   }
 }
 
 @media only screen and (max-width: 480px) {
+  .subscribe__comment {
+
+    gap: 20px;
+  }
   .subscribe__comment > input {
     width: 100%;
   }
-  .subscribe{
+  .subscribe {
     padding: 0 20px;
+  }
+  .subscribe__comment p {
+    font-size: 2.5rem;
+  }
+  .subscribe__comment h3 {
+    font-size: 1rem;
   }
 }

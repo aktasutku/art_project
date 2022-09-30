@@ -1,0 +1,14 @@
+.adminPage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px 10px 65px;
+}
+
+.adminPage__content {
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    width: 100%;
+  }
+  

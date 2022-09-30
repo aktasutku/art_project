@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import Logo from "../assets/Logo.png";
 import { MdOutlineShoppingBag } from "react-icons/md";
@@ -9,7 +9,6 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { selectAllCartItems } from "../app/features/cartItem/cartItemSlice";
-import { useEffect } from "react";
 
 const Header = () => {
   //Redux
@@ -35,22 +34,22 @@ const Header = () => {
         }
       >
         <ul className="animate__animated animate__fadeInLeft">
-          <NavLink activeclassname="active" to="/art_project">
+          <NavLink activeclassname="headerActive" to="art_project">
             <li onClick={() => setDisplay(false)}>Home</li>
           </NavLink>
-          <NavLink activeclassname="active" to="shop">
+          <NavLink activeclassname="headerActive" to="shop">
             <li onClick={() => setDisplay(false)}>Shop</li>
           </NavLink>
-          <NavLink activeclassname="active" to="customized-portrait">
+          <NavLink activeclassname="headerActive" to="customized-portrait">
             <li onClick={() => setDisplay(false)}>Customized Portrait</li>
           </NavLink>
-          <NavLink activeclassname="active" to="portfolio">
+          <NavLink activeclassname="headerActive" to="portfolio">
             <li onClick={() => setDisplay(false)}>Portfolio</li>
           </NavLink>
-          <NavLink activeclassname="active" to="about-me">
+          <NavLink activeclassname="headerActive" to="about-me">
             <li onClick={() => setDisplay(false)}>About Me</li>
           </NavLink>
-          <NavLink activeclassname="active" to="behind-the-scenes">
+          <NavLink activeclassname="headerActive" to="behind-the-scenes">
             <li onClick={() => setDisplay(false)}>Behind the Scenes</li>
           </NavLink>
         </ul>

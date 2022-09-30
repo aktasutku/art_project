@@ -14,9 +14,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: [
-      'DynaPuff'
-    ]
+    fontFamily: ["DynaPuff"],
   },
 });
 
@@ -41,7 +39,7 @@ const Subscribe = () => {
             color="primary"
             sx={{
               maxWidth: 500,
-              letterSpacing:3,
+              letterSpacing: 3,
               bgcolor: "#FFF",
             }}
           />
@@ -49,15 +47,15 @@ const Subscribe = () => {
             variant="contained"
             sx={{
               maxWidth: 500,
-              color:"#FFF",
-              letterSpacing:3,
-              "&:hover":{backgroundColor:"#FFF",color:"#FB8712"}
+              color: "#FFF",
+              letterSpacing: 3,
+              "&:hover": { backgroundColor: "#FFF", color: "#FB8712" },
             }}
           >
             SUBMIT
           </Button>
         </ThemeProvider>
-        
+
         {/* <button type="submit">SUBMIT</button> */}
       </form>
     </div>

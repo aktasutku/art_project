@@ -96,11 +96,11 @@
 
 @media only screen and (max-width: 480px) {
   .recent__comment p {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .recent__comment button {
     width: 150px;
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   .recent__img img {
     width: 100px;

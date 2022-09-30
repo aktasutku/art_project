@@ -71,7 +71,7 @@
 .header__bag p:hover::after {
   scale: 1;
 }
-.active {
+.headerActive {
   border-bottom: solid 2px var(--main-color);
 }
 

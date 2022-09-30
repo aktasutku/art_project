@@ -8,6 +8,10 @@
   --main-color: #fb8712;
   --second-color: #fdf2da;
   --header-height: 80px;
+  /* SIDE-BAR */
+  --sidebarOpen-width:250px;
+  --sidebarClose-width:60px;
+  --sidebar-left-margin:5px;
 }
 
 @media only screen and (max-width: 1300px) {
