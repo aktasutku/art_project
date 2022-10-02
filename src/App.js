@@ -2,17 +2,18 @@ import "./App.css";
 import Header from "./components/Header";
 import Home from "./pages/Home_Page";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ShopPage from "./pages/ShopPage";
+import Shop_Page from "./pages/Shop_Page";
 import Product_Page from "./components/Product_Page";
 import Footer from "./components/Footer";
 import Not_Found from "./pages/Not_Found";
 import Counter from "./app/features/counter/Counter";
 import PostsList from "./features/posts/PostsList";
 import AddPostForm from "./features/posts/AddPostForm";
-import ShoppingBagPage from "./pages/ShoppingBagPage";
+import ShoppingBag_Page from "./pages/ShoppingBag_Page";
 import AboutMe_Page from "./pages/AboutMe_Page";
-import PortfolioPage from "./pages/PortfolioPage";
+import Portfolio_Page from "./pages/Portfolio_Page";
 import Admin_Page from "./pages/Admin_Page";
+import AdminShopPage from "./components/admin/AdminMain";
 //redux
 import { selectUserName } from "./app/features/user/userSlice";
 import { useSelector } from "react-redux";
@@ -30,12 +31,12 @@ function App() {
           <Route path="/art_project" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/shop">
-            <Route index element={<ShopPage />} />
+            <Route index element={<Shop_Page />} />
             <Route path="product/:id" element={<Product_Page />} />
           </Route>
-          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/portfolio" element={<Portfolio_Page />} />
           <Route path="/about-me" element={<AboutMe_Page />} />
-          <Route path="/shopping-bag" element={<ShoppingBagPage />} />
+          <Route path="/shopping-bag" element={<ShoppingBag_Page />} />
 
           {/* ADMIN */}
           <Route
@@ -43,7 +44,7 @@ function App() {
             element={adminName ? <Admin_Page /> : <Not_Found />}
           >
             <Route path="home" element={<Admin_Page />} />
-            <Route path="shop" element={<Admin_Page />} />
+            <Route path="shop" element={<AdminShopPage />} />
             <Route path="portfolio" element={<Admin_Page />} />
             <Route path="about-me" element={<Admin_Page />} />
             <Route path="behind-the-scenes" element={<Admin_Page />} />

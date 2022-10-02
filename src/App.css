@@ -9,9 +9,12 @@
   --second-color: #fdf2da;
   --header-height: 80px;
   /* SIDE-BAR */
-  --sidebarOpen-width:250px;
-  --sidebarClose-width:60px;
-  --sidebar-left-margin:5px;
+  --sidebarOpen-width: 250px;
+  --sidebarClose-width: 60px;
+  --sidebar-left-margin: 5px;
+  /* Admin Page */
+  --admin-borderRadius: 10px;
+  --admin-headerHeight: 35px;
 }
 
 @media only screen and (max-width: 1300px) {

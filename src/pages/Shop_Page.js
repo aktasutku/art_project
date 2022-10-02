@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./ShopPage.css";
+import "./Shop_Page.css";
 import Product_Card from "../components/Product_Card";
 //React-Router
 import { Link } from "react-router-dom";

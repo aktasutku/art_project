@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, collection } from "firebase/firestore/lite";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -22,5 +23,7 @@ export const db = getFirestore(app);
 export const portfolioItemsCol = collection(db, "portfolioItems");
 export const shopItemsCol = collection(db, "shopItems");
 export const socialLinksCol = collection(db, "socialLink");
+//Storage
+export const storage = getStorage();
 //authentication
 export const auth = getAuth(app);

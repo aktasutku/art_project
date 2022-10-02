@@ -14,8 +14,9 @@ import {
   selectUserPhoto,
   selectUserName,
 } from "../../app/features/user/userSlice";
-import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+//animate
+import "animate.css";
 
 const Sidebar = () => {
   // const photoUrl =  useSelector(selectUserPhoto);
@@ -38,13 +39,14 @@ const Sidebar = () => {
     setOpen(!open);
   };
   const closeSideBar = () => {
-    setOpen(false)
+    setOpen(false);
   };
   const handleLink = (name) => {
     return name.toLocaleLowerCase().replaceAll(" ", "-");
   };
   return (
-    <div className={mainClass}>
+    // <div className={mainClass}>
+    <div className={`${mainClass} animate__animated animate__bounceInLeft`}>
       <div className="sideBar__header">
         <div className="menu_buttons" onClick={handleSize}>
           <MenuIcon className="sideBar_icon" />

@@ -11,6 +11,7 @@
   align-items: center;
   padding: 10px 5px;
   border: 1px solid var(--main-color);
+  z-index: 999;
   /* transition: all ease-in 1s; */
 }
 .sideBar__show {

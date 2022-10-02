@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import Wall from "./Home/Wall";
-import Portrait from "./Home/Portrait";
-import Recent from "./Home/Recent";
+import Wall from "../components/Home/Wall";
+import Portrait from "../components/Home/Portrait";
+import Recent from "../components/Home/Recent";
 import Subscribe from "../components/Subscribe";
-import Shop from "./Home/Shop";
-import Carousel from "./Home/Carousel";
+import Shop from "../components/Home/Shop";
+import Carousel from "../components/Home/Carousel";
 
 const Home = () => {
   useEffect(() => {

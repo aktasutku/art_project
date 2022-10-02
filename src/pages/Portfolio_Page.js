@@ -1,5 +1,5 @@
 import React, { useEffect, useState, forceUpdate } from "react";
-import "./PortfolioPage.css";
+import "./Portfolio_Page.css";
 //MUI
 import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";

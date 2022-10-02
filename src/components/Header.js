@@ -5,7 +5,7 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 import { AiOutlineMenu } from "react-icons/ai";
 import "animate.css";
 
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { selectAllCartItems } from "../app/features/cartItem/cartItemSlice";
@@ -22,9 +22,11 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div className="header__img">
-        <img src={Logo} />
-      </div>
+      <Link to="/">
+        <div className="header__img">
+          <img src={Logo} />
+        </div>
+      </Link>
       <div className="header__menu " onClick={() => setDisplay(() => !display)}>
         <AiOutlineMenu />
       </div>
