@@ -14,6 +14,9 @@ const Header = () => {
   //Redux
   const cartItems = useSelector(selectAllCartItems);
   const [display, setDisplay] = useState(false);
+  // className variables
+  const activeHeader = ({ isActive }) => (isActive ? "headerActive" : "");
+  const ulList = display ? "header__list " : "header__list header__list__none ";
   let totalItemsQty = 0;
 
   cartItems.map((item) => {
@@ -30,28 +33,24 @@ const Header = () => {
       <div className="header__menu " onClick={() => setDisplay(() => !display)}>
         <AiOutlineMenu />
       </div>
-      <div
-        className={
-          display ? "header__list " : "header__list header__list__none "
-        }
-      >
+      <div className={ulList}>
         <ul className="animate__animated animate__fadeInLeft">
-          <NavLink activeclassname="headerActive" to="art_project">
+          <NavLink to="art_project" className={activeHeader}>
             <li onClick={() => setDisplay(false)}>Home</li>
           </NavLink>
-          <NavLink activeclassname="headerActive" to="shop">
+          <NavLink to="shop" className={activeHeader}>
             <li onClick={() => setDisplay(false)}>Shop</li>
           </NavLink>
-          <NavLink activeclassname="headerActive" to="customized-portrait">
+          <NavLink to="customized-portrait" className={activeHeader}>
             <li onClick={() => setDisplay(false)}>Customized Portrait</li>
           </NavLink>
-          <NavLink activeclassname="headerActive" to="portfolio">
+          <NavLink to="portfolio" className={activeHeader}>
             <li onClick={() => setDisplay(false)}>Portfolio</li>
           </NavLink>
-          <NavLink activeclassname="headerActive" to="about-me">
+          <NavLink to="about-me" className={activeHeader}>
             <li onClick={() => setDisplay(false)}>About Me</li>
           </NavLink>
-          <NavLink activeclassname="headerActive" to="behind-the-scenes">
+          <NavLink to="behind-the-scenes" className={activeHeader}>
             <li onClick={() => setDisplay(false)}>Behind the Scenes</li>
           </NavLink>
         </ul>
@@ -66,7 +65,7 @@ const Header = () => {
           )}
         </div>
         <p>
-          <NavLink activeclassname="active" to="/shopping-bag">
+          <NavLink className={activeHeader} to="/shopping-bag">
             Shopping Bag
           </NavLink>
         </p>

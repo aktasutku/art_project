@@ -5,6 +5,7 @@ import Recent from "../components/Home/Recent";
 import Subscribe from "../components/Subscribe";
 import Shop from "../components/Home/Shop";
 import Carousel from "../components/Home/Carousel";
+import LazyLoad from "react-lazy-load";
 
 const Home = () => {
   useEffect(() => {

@@ -1,12 +1,15 @@
 import React from "react";
 import "./Portrait.css";
 import portraitImg from "../../assets/portrait.png";
+import LazyLoad from "react-lazy-load";
 
 const Portrait = () => {
   return (
     <div className="portrait">
       <div className="portrait__image">
-        <img src={portraitImg} />
+        <LazyLoad>
+          <img src={portraitImg} />
+        </LazyLoad>
       </div>
       <div className="portrait__comment">
         <h1>Get your Customized Portrait Today!</h1>

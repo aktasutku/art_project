@@ -58,7 +58,7 @@
   cursor: pointer;
 }
 
-/* Hover Under Line */
+/* Hover Under Line Effect*/
 .header__list ul li:after,
 .header__bag p:after {
   display: block;
@@ -71,6 +71,9 @@
 .header__bag p:hover::after {
   scale: 1;
 }
+
+/* ****************** */
+
 .headerActive {
   border-bottom: solid 2px var(--main-color);
 }

@@ -4,16 +4,19 @@ import wallone from "../../assets/wall1.png";
 import walltwo from "../../assets/wall2.png";
 import wallthree from "../../assets/wall3.png";
 import wallfour from "../../assets/wall4.png";
+import LazyLoad from "react-lazy-load";
 
 const Wall = () => {
+  const images = [wallone, walltwo, wallthree, wallfour];
   return (
     <div className="wall">
       <h1>Wall Art Prints</h1>
       <div className="wall__img">
-        <img src={wallone} />
-        <img src={walltwo} />
-        <img src={wallthree} />
-        <img src={wallfour} />
+        {images.map((img) => (
+          <LazyLoad>
+            <img src={img} />
+          </LazyLoad>
+        ))}
       </div>
     </div>
   );

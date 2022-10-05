@@ -4,6 +4,7 @@ import "./Recent.css";
 import Recent1 from "../../assets/Recent1.png";
 import Recent2 from "../../assets/Recent2.png";
 import Recent3 from "../../assets/Recent3.png";
+import LazyLoad from "react-lazy-load";
 
 const recentImg = [Recent1, Recent2, Recent3];
 
@@ -21,7 +22,9 @@ const Recent = () => {
       </div>
       <div className="recent__img">
         {recentImg.map((img) => (
-          <img src={img} key={img}/>
+          <LazyLoad>
+            <img src={img} key={img} />
+          </LazyLoad>
         ))}
       </div>
     </div>

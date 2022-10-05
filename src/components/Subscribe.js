@@ -3,6 +3,7 @@ import "./Subscribe.css";
 import SubscribeImg from "../assets/Subscribe.png";
 import { TextField, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import LazyLoad from "react-lazy-load";
 
 const theme = createTheme({
   palette: {
@@ -22,7 +23,9 @@ const Subscribe = () => {
   return (
     <div className="subscribe">
       <div className="subscribe__img">
-        <img src={SubscribeImg} />
+        <LazyLoad>
+          <img src={SubscribeImg} />
+        </LazyLoad>
       </div>
       <form className="subscribe__comment">
         <p>Subscribe</p>

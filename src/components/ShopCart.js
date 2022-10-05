@@ -9,7 +9,8 @@ const ShopCart = (props) => {
   return (
     <div className="shopCart">
       <Link to={`/${link}`}>
-        <img src={props.image} />
+        <img src={props.image} loading="lazy" />
+
         <button>{props.name}</button>
       </Link>
     </div>

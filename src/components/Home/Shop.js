@@ -11,7 +11,7 @@ const Shop = () => {
     <div className="shop">
       <div className="halfBG"></div>
       <div className="shop__image">
-        <img src={ShopImage} />
+        <img src={ShopImage} loading="lazy" />
       </div>
 
       <div className="shop__cart">

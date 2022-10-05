@@ -42,7 +42,7 @@ function App() {
           <Route
             path="/admin"
             element={adminName ? <Admin_Page /> : <Not_Found />}
-          >
+          >  
             <Route path="home" element={<Admin_Page />} />
             <Route path="shop" element={<AdminShopPage />} />
             <Route path="portfolio" element={<Admin_Page />} />

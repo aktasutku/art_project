@@ -74,13 +74,6 @@ const Footer = () => {
     if (!userName) {
       signInWithPopup(auth, provider)
         .then((result) => {
-          // dispatch(
-          //   setUserLoginDetails({
-          //     name: result.user.displayName,
-          //     email: result.user.email,
-          //     photo: result.user.photoURL,
-          //   })
-          // );
           setUser(result.user);
           navigate("/admin");
         })
@@ -91,7 +84,8 @@ const Footer = () => {
       signOut(auth)
         .then(() => {
           dispatch(setUserSignOut());
-          navigate("/");
+          navigate("/home"); // ??? it dosent direct me to home page
+          console.log("home");
         })
         .catch((err) => alert(err.message));
     }

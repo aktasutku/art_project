@@ -23,7 +23,9 @@ const Sidebar = () => {
   const adminName = useSelector(selectUserName);
   const firstLetter = adminName[0];
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState({ activeIndex: 0 });
 
+  // Menu Items
   const sideBarContent = [
     { name: "Home", icon: HomeIcon },
     { name: "Shop", icon: ShoppingBagIcon },
@@ -48,21 +50,27 @@ const Sidebar = () => {
     // <div className={mainClass}>
     <div className={`${mainClass} animate__animated animate__bounceInLeft`}>
       <div className="sideBar__header">
-        <div className="menu_buttons" onClick={handleSize}>
+        <div className="sideBar__menu_buttons" onClick={handleSize}>
           <MenuIcon className="sideBar_icon" />
           <p className={contentClass}>Menu</p>
         </div>
       </div>
       <hr className="sideBar__divider" />
       <div className="sideBar__content">
-        {sideBarContent.map((item) => {
+        {sideBarContent.map((item, i) => {
           return (
             <NavLink
               to={handleLink(item.name)}
               key={item.name}
               onClick={closeSideBar}
             >
-              <div className="menu_buttons">
+              <div
+                onClick={() => setActive({ activeIndex: i })}
+                // className="sideBar__menu_buttons"
+                className={`sideBar__menu_buttons ${
+                  i == active.activeIndex && "sideBarActive"
+                }`}
+              >
                 <item.icon />
                 <p className={contentClass}>{item.name}</p>
               </div>
