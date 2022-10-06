@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./AdminPortfolio__Edit.css";
 //MUI
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import DoneSharpIcon from "@mui/icons-material/DoneSharp";
@@ -55,24 +54,27 @@ const AdminPortfolio__Edit = ({ setClose, selectedItem }) => {
               setProgress(
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
               );
+              console.log(snapshot);
             },
             (error) => {
               console.log(error);
             },
             () => {
               // Get ImageURL
-              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                setNewImgURL(downloadURL);
-                //   Update Collection Document
-                setDoc(updateItemRef, {
-                  title: newTitle.length > 0 ? newTitle : selectedItem.title,
-                  img: downloadURL,
-                })
-                  .then(() => {
-                    alert("Succesfully Added");
+              getDownloadURL(uploadTask.snapshot.ref)
+                .then((downloadURL) => {
+                  setNewImgURL(downloadURL);
+                  //   Update Collection Document
+                  setDoc(updateItemRef, {
+                    title: newTitle.length > 0 ? newTitle : selectedItem.title,
+                    img: downloadURL,
                   })
-                  .catch((err) => console.log(err));
-              });
+                    .then(() => {
+                      alert("Succesfully Added");
+                    })
+                    .catch((err) => console.log(err));
+                })
+                .catch((err) => console.log(err));
             }
           );
         })

@@ -13,7 +13,6 @@ import ShoppingBag_Page from "./pages/ShoppingBag_Page";
 import AboutMe_Page from "./pages/AboutMe_Page";
 import Portfolio_Page from "./pages/Portfolio_Page";
 import Admin_Page from "./pages/Admin_Page";
-import AdminShopPage from "./components/admin/AdminMain";
 //redux
 import { selectUserName } from "./app/features/user/userSlice";
 import { useSelector } from "react-redux";
@@ -42,9 +41,9 @@ function App() {
           <Route
             path="/admin"
             element={adminName ? <Admin_Page /> : <Not_Found />}
-          >  
+          >
             <Route path="home" element={<Admin_Page />} />
-            <Route path="shop" element={<AdminShopPage />} />
+            <Route path="shop" element={<Admin_Page />} />
             <Route path="portfolio" element={<Admin_Page />} />
             <Route path="about-me" element={<Admin_Page />} />
             <Route path="behind-the-scenes" element={<Admin_Page />} />

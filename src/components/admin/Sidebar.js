@@ -66,7 +66,6 @@ const Sidebar = () => {
             >
               <div
                 onClick={() => setActive({ activeIndex: i })}
-                // className="sideBar__menu_buttons"
                 className={`sideBar__menu_buttons ${
                   i == active.activeIndex && "sideBarActive"
                 }`}

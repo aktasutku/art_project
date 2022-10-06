@@ -1,4 +1,4 @@
-.adminMain {
+.adminPortfolio {
   width: 100%;
   height: 100%;
   border-radius: var(--admin-borderRadius);
@@ -6,7 +6,7 @@
   padding: 5px 0 5px 5px;
 }
 
-.adminMain__header {
+.adminPortfolio__header {
   position: fixed;
   /* height: var(--admin-headerHeight); */
   width: max-content;
@@ -19,14 +19,14 @@
   gap: 30px;
   z-index: 10;
 }
-.adminMain__header__icon {
+.adminPortfolio__header__icon {
   cursor: pointer;
   position: relative;
   width: max-content;
   height: max-content;
 }
 
-.adminMain__header__icon > p {
+.adminPortfolio__header__icon > p {
   position: absolute;
   border: 1px solid var(--main-color);
   background-color: var(--second-color);
@@ -38,12 +38,12 @@
   font-weight: 400;
 }
 
-.adminMain__header__icon:hover > p {
+.adminPortfolio__header__icon:hover > p {
   display: block;
 }
 
 /* Body */
-.adminMain__Imgbody {
+.adminPortfolio__Imgbody {
   /* position: relative; */
   margin-top: var(--admin-headerHeight);
   /* border: 1px solid black; */

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./AdminMain.css";
-import AdminPortfolio__Add from "./Add/AdminPortfolio__Add";
-import AdminPortfolio__Delete from "./Delete/AdminPortfolio__Delete";
-import AdminPortfolio__Edit from "./Edit/AdminPortfolio__Edit";
-import AdminImgCard from "./AdminImgCard";
+import "./AdminPortfolio.css";
+import AdminPortfolio__Add from "./Helper/AdminPortfolio__Add";
+import AdminPortfolio__Delete from "./Helper/AdminPortfolio__Delete";
+import AdminPortfolio__Edit from "./Helper/AdminPortfolio__Edit";
+import AdminImgCard from "./Helper/AdminImgCard";
 // MUI
 import AddCircleSharpIcon from "@mui/icons-material/AddCircleSharp";
 import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
@@ -18,7 +18,7 @@ import {
   collection,
 } from "firebase/firestore";
 
-const AdminMain = () => {
+const AdminPortfolio = () => {
   //Scrool Top when Page Load
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,7 +41,7 @@ const AdminMain = () => {
   const [deleteItemActive, setDeleteItemActive] = useState(false);
   const [editItemActive, setEditItemActive] = useState(false);
 
-  //Set Firebase Data
+  // GET PORTFOLIO COLLECTION DOCUMENTS
   useEffect(
     () =>
       onSnapshot(portfolioItemsCol, (snapshot) => {
@@ -64,19 +64,19 @@ const AdminMain = () => {
   };
 
   return (
-    <div className="adminMain">
+    <div className="adminPortfolio">
       {(!addItemActive || !deleteItemActive || !editItemActive) && (
         <>
-          <div className="adminMain__header animate__animated animate__bounceInDown">
+          <div className="adminPortfolio__header animate__animated animate__bounceInDown">
             {/* DISPLAY HEADER ICONS */}
             {icons.map((item) => (
-              <div className="adminMain__header__icon" key={item.name}>
+              <div className="adminPortfolio__header__icon" key={item.name}>
                 <item.icon onClick={() => handleClick(item.name)} />
                 <p>{item.name}</p>
               </div>
             ))}
           </div>
-          <div className="adminMain__Imgbody">
+          <div className="adminPortfolio__Imgbody">
             {/* Display DATABASE IMAGES */}
             {portfolioItems.map((item) => {
               return (
@@ -99,7 +99,7 @@ const AdminMain = () => {
           selectedItem={selectedItemData}
         />
       )}
- 
+
       {editItemActive && (
         <AdminPortfolio__Edit
           setClose={setEditItemActive}
@@ -110,4 +110,4 @@ const AdminMain = () => {
   );
 };
 
-export default AdminMain;
+export default AdminPortfolio;
