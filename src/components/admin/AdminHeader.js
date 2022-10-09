@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 // MUI
 import AddCircleSharpIcon from "@mui/icons-material/AddCircleSharp";
 import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
 import ModeEditOutlineSharpIcon from "@mui/icons-material/ModeEditOutlineSharp";
+// Context
+import { ActiveAddDeleteEditContext } from "../../app/features/Context/AddEditDeleteActiveCxt";
+import { SelectedItemCtx } from "../../app/features/Context/selectedItemCtx";
 
 const icons = [
   { icon: AddCircleSharpIcon, name: "Add Item" },
@@ -10,20 +13,29 @@ const icons = [
   { icon: ModeEditOutlineSharpIcon, name: "Edit Selected Item" },
 ];
 
-const AdminHeader = ({selectedItemData}) => {
+const AdminHeader = () => {
   // Header Icons Variable
-  const [addItemActive, setAddItemActive] = useState(false);
-  const [deleteItemActive, setDeleteItemActive] = useState(false);
-  const [editItemActive, setEditItemActive] = useState(false);
+  //CONTEXT
+  const { addActive, editActive, deleteActive } = useContext(
+    ActiveAddDeleteEditContext
+  );
+  const [selectedItem, setSelectedItem] = useContext(SelectedItemCtx);
+
+  const [addItemActive, setAddItemActive] = addActive;
+  const [deleteItemActive, setDeleteItemActive] = deleteActive;
+  const [editItemActive, setEditItemActive] = editActive;
 
   const handleClick = (e) => {
     const name = e.toLowerCase();
     if (name.includes("add")) {
       setAddItemActive(true);
     } else if (name.includes("delete")) {
-      selectedItemData ? setDeleteItemActive(true) : alert("Item not selected");
+      selectedItem ? setDeleteItemActive(true) : alert("Item not selected");
+      // setAddItemActive(false);
+      // setDeleteItemActive(true);
+      // setEditItemActive(false);
     } else if (name.includes("edit")) {
-      selectedItemData ? setEditItemActive(true) : alert("Item not selected");
+      selectedItem ? setEditItemActive(true) : alert("Item not selected");
     }
   };
   return (

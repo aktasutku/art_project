@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./AdminPortfolio.css";
-import AdminPortfolio__Add from "./Helper/AdminPortfolio__Add";
-import AdminPortfolio__Delete from "./Helper/AdminPortfolio__Delete";
-import AdminPortfolio__Edit from "./Helper/AdminPortfolio__Edit";
+import AdminPortfolio__Add from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Add";
+import AdminPortfolio__Delete from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Delete";
+import AdminPortfolio__Edit from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Edit";
 import AdminImgCard from "./Helper/AdminImgCard";
-// MUI
-import AddCircleSharpIcon from "@mui/icons-material/AddCircleSharp";
-import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
-import ModeEditOutlineSharpIcon from "@mui/icons-material/ModeEditOutlineSharp";
+
 //Animate
 import "animate.css";
 //Firebase
@@ -17,29 +14,29 @@ import {
   getFirestore,
   collection,
 } from "firebase/firestore";
+import { SelectedItemCtx } from "../../app/features/Context/selectedItemCtx";
+import { ActiveAddDeleteEditContext } from "../../app/features/Context/AddEditDeleteActiveCxt";
 
 const AdminPortfolio = () => {
   //Scrool Top when Page Load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  //Variables
-  const icons = [
-    { icon: AddCircleSharpIcon, name: "Add Item" },
-    { icon: DeleteSharpIcon, name: "Delete Selected Item" },
-    { icon: ModeEditOutlineSharpIcon, name: "Edit Selected Item" },
-  ];
   // Firebase Database Items
   const db = getFirestore();
   const portfolioItemsCol = collection(db, "portfolioItems");
-
   const [portfolioItems, setPortfolioItems] = useState([]);
-  const [selectedItemData, setSelectedItemData] = useState("");
 
-  // Header Icons Variable
-  const [addItemActive, setAddItemActive] = useState(false);
-  const [deleteItemActive, setDeleteItemActive] = useState(false);
-  const [editItemActive, setEditItemActive] = useState(false);
+  // CONTEXT
+  const { addActive, editActive, deleteActive } = useContext(
+    ActiveAddDeleteEditContext
+  );
+  // GET SELECTED ITEM FROM IMG CARD
+  const [selectedItem, setSelectedItem] = useContext(SelectedItemCtx);
+  // OPEN CLOSE COMPONENTS
+  const [addItemActive, setAddItemActive] = addActive;
+  const [deleteItemActive, setDeleteItemActive] = deleteActive;
+  const [editItemActive, setEditItemActive] = editActive;
 
   // GET PORTFOLIO COLLECTION DOCUMENTS
   useEffect(
@@ -52,60 +49,26 @@ const AdminPortfolio = () => {
     []
   );
 
-  const handleClick = (e) => {
-    const name = e.toLowerCase();
-    if (name.includes("add")) {
-      setAddItemActive(true);
-    } else if (name.includes("delete")) {
-      selectedItemData ? setDeleteItemActive(true) : alert("Item not selected");
-    } else if (name.includes("edit")) {
-      selectedItemData ? setEditItemActive(true) : alert("Item not selected");
-    }
-  };
-
   return (
     <div className="adminPortfolio">
       {(!addItemActive || !deleteItemActive || !editItemActive) && (
         <>
-          <div className="adminPortfolio__header animate__animated animate__bounceInDown">
-            {/* DISPLAY HEADER ICONS */}
-            {icons.map((item) => (
-              <div className="adminPortfolio__header__icon" key={item.name}>
-                <item.icon onClick={() => handleClick(item.name)} />
-                <p>{item.name}</p>
-              </div>
-            ))}
-          </div>
           <div className="adminPortfolio__Imgbody">
             {/* Display DATABASE IMAGES */}
             {portfolioItems.map((item) => {
               return (
-                <AdminImgCard
-                  key={item.id}
-                  item={item}
-                  sendSelected={(e) => setSelectedItemData(e)}
-                  selectedId={selectedItemData.id}
-                />
+                <AdminImgCard key={item.id} item={item} imageUrl={item.img} />
               );
             })}
           </div>
         </>
       )}
       {/* DISPLAY ADD - EDIT - DELETE PAGE */}
-      {addItemActive && <AdminPortfolio__Add setClose={setAddItemActive} />}
+      {addItemActive && <AdminPortfolio__Add />}
       {deleteItemActive && (
-        <AdminPortfolio__Delete
-          setClose={setDeleteItemActive}
-          selectedItem={selectedItemData}
-        />
+        <AdminPortfolio__Delete selectedItem={selectedItem} />
       )}
-
-      {editItemActive && (
-        <AdminPortfolio__Edit
-          setClose={setEditItemActive}
-          selectedItem={selectedItemData}
-        />
-      )}
+      {editItemActive && <AdminPortfolio__Edit selectedItem={selectedItem} />}
     </div>
   );
 };

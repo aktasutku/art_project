@@ -5,7 +5,7 @@ import Product_Card from "../components/Product_Card";
 import { Link } from "react-router-dom";
 //Firebase
 import { shopItemsCol } from "../firebase";
-import { getDocs } from "firebase/firestore/lite";
+import { getDocs } from "firebase/firestore";
 
 //If you want to use Json file fetch data this way
 // const myItems = require("../Items.json");

@@ -20,7 +20,7 @@ import {
 } from "../app/features/cartItem/cartItemSlice";
 //FIREBASE
 import { shopItemsCol } from "../firebase";
-import { doc, getDoc } from "firebase/firestore/lite";
+import { doc, getDoc } from "firebase/firestore";
 //React Router
 import { useParams } from "react-router-dom";
 // const myItems = require("../Items.json");

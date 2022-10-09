@@ -1,12 +1,13 @@
 .App {
   max-width: 1800px;
   margin: 0 auto;
-  background-color: #fdf2da;
+  background-color: var(--second-color);
   color: #fb8712;
 }
 :root {
   --main-color: #fb8712;
   --second-color: #fdf2da;
+  /* --second-color: rgb(29, 27, 27); */
   --header-height: 80px;
   /* SIDE-BAR */
   --sidebarOpen-width: 250px;

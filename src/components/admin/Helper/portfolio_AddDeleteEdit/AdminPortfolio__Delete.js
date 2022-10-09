@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // MUI
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import DoneSharpIcon from "@mui/icons-material/DoneSharp";
 // FIREBASE
-import { doc, deleteDoc, getFirestore } from "firebase/firestore";
-import { getStorage, ref, deleteObject } from "firebase/storage";
+import { doc, deleteDoc } from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
+import { db, storage } from "../../../../firebase";
+import { ActiveAddDeleteEditContext } from "../../../../app/features/Context/AddEditDeleteActiveCxt";
 
-const AdminPortfolio__Delete = ({ setClose, selectedItem }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  // variables
-  const db = getFirestore();
-  const storage = getStorage();
-  const collectionRef = doc(db, "portfolioItems", selectedItem.id);
-  const storageRef = ref(storage, selectedItem.img);
+const AdminPortfolio__Delete = ({ selectedItem }) => {
+  // CONTEXT
+  const { deleteActive } = useContext(ActiveAddDeleteEditContext);
+  const [deleteItemActive, setDeleteItemActive] = deleteActive;
 
-  const [deleteActive, setDeleteActive] = useState(false);
+  const selectedItemColRef = doc(db, "portfolioItems", selectedItem.id);
+  const selectedItemStorageRef = ref(storage, selectedItem.img);
+
+  const [deleteButtonActive, setDeleteButtonActive] = useState(false);
   const [deleteSureActive, setDeleteSureActive] = useState(false);
 
   const handleDelete = () => {
     // DELETE IMG FROM STORAGE
-    deleteObject(storageRef)
+    deleteObject(selectedItemStorageRef)
       .then(() => {
         console.log("storaged deleted");
       })
@@ -30,7 +30,7 @@ const AdminPortfolio__Delete = ({ setClose, selectedItem }) => {
       });
 
     // DELETE COLLECTIONG DOCUMENT FROM FIRESTORE
-    deleteDoc(collectionRef)
+    deleteDoc(selectedItemColRef)
       .then(() => {
         setDeleteSureActive(true);
       })
@@ -43,7 +43,7 @@ const AdminPortfolio__Delete = ({ setClose, selectedItem }) => {
     <div className="adminAddDeleteEdit">
       <div
         className="adminAddDeleteEdit__close"
-        onClick={() => setClose(false)}
+        onClick={() => setDeleteItemActive(false)}
       >
         <CloseSharpIcon />
       </div>
@@ -57,10 +57,10 @@ const AdminPortfolio__Delete = ({ setClose, selectedItem }) => {
           <p>{selectedItem.title}</p>
         </div>
         <div className="adminAddDeleteEdit__buttons">
-          {!deleteActive && (
-            <button onClick={() => setDeleteActive(true)}>Delete</button>
+          {!deleteButtonActive && (
+            <button onClick={() => setDeleteButtonActive(true)}>Delete</button>
           )}
-          {deleteActive && (
+          {deleteButtonActive && (
             <div style={{ display: "flex", gap: "20px" }}>
               {!deleteSureActive && (
                 <button onClick={handleDelete}>Are you Sure (Delete) ?</button>
@@ -72,7 +72,9 @@ const AdminPortfolio__Delete = ({ setClose, selectedItem }) => {
                 </p>
               )}
               {!deleteSureActive && (
-                <button onClick={() => setDeleteActive(false)}>Cancel</button>
+                <button onClick={() => setDeleteButtonActive(false)}>
+                  Cancel
+                </button>
               )}
             </div>
           )}

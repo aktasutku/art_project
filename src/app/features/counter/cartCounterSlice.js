@@ -18,9 +18,6 @@ export const cartCounterSlice = createSlice({
     reset: (state) => {
       state.count = 0;
     },
-    incrementByAmount: (state, action) => {
-      state.count += action.payload;
-    },
     addValue: (state, action) => {
       state.count = state.count + Number(action.payload);
     },
@@ -36,7 +33,6 @@ export const cartCounterSlice = createSlice({
 export const {
   increment,
   decrement,
-  incrementByAmount,
   reset,
   addValue,
   setCount,

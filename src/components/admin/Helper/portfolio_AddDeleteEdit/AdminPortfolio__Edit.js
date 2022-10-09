@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 //MUI
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import DoneSharpIcon from "@mui/icons-material/DoneSharp";
@@ -19,11 +19,13 @@ import {
   getDownloadURL,
   uploadBytesResumable,
 } from "firebase/storage";
+import { db, storage } from "../../../../firebase";
+import { ActiveAddDeleteEditContext } from "../../../../app/features/Context/AddEditDeleteActiveCxt";
 
 const AdminPortfolio__Edit = ({ setClose, selectedItem }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // CONTEXT
+  const { editActive } = useContext(ActiveAddDeleteEditContext);
+  const [editItemActive, setEditItemActive] = editActive;
 
   // VARIABLES
   const [newTitle, setNewTitle] = useState("");
@@ -33,25 +35,24 @@ const AdminPortfolio__Edit = ({ setClose, selectedItem }) => {
   const [uploaded, setUploaded] = useState("");
 
   //   FIREBASE VARIABLES
-  const db = getFirestore();
-  const storage = getStorage();
-  const updateItemRef = doc(db, "portfolioItems", selectedItem.id);
-  const deleteStorageRef = ref(storage, selectedItem.img);
-  const addStorageRef = ref(
+  const updateSelectedItemColRef = doc(db, "portfolioItems", selectedItem.id);
+  const deleteExistingItemStorageRef = ref(storage, selectedItem.img);
+  const addNewItemStorageRef = ref(
     storage,
     `portfolioItems/${newImage?.name + uuidv4()}`
   );
-  const uploadTask = uploadBytesResumable(addStorageRef, newImage);
+  const uploadTask = uploadBytesResumable(addNewItemStorageRef, newImage);
 
   const handleEdit = () => {
     if (newImage) {
-      deleteObject(deleteStorageRef)
+      deleteObject(deleteExistingItemStorageRef)
         .then(() => {
           // If old image deleted from the storage upload new image
           uploadTask.on(
             "state_changed",
             (snapshot) => {
               setProgress(
+                // This not working properly sometimes dosent give me the value
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
               );
               console.log(snapshot);
@@ -59,15 +60,15 @@ const AdminPortfolio__Edit = ({ setClose, selectedItem }) => {
             (error) => {
               console.log(error);
             },
-            () => {
+            async () => {
               // Get ImageURL
-              getDownloadURL(uploadTask.snapshot.ref)
+              await getDownloadURL(uploadTask.snapshot.ref)
                 .then((downloadURL) => {
                   setNewImgURL(downloadURL);
                   //   Update Collection Document
-                  setDoc(updateItemRef, {
-                    title: newTitle.length > 0 ? newTitle : selectedItem.title,
+                  setDoc(updateSelectedItemColRef, {
                     img: downloadURL,
+                    title: newTitle.length > 0 ? newTitle : selectedItem.title,
                   })
                     .then(() => {
                       alert("Succesfully Added");
@@ -83,11 +84,12 @@ const AdminPortfolio__Edit = ({ setClose, selectedItem }) => {
         });
     } else if (!newImage && newTitle.trim() !== "") {
       setDoc(
-        updateItemRef,
+        updateSelectedItemColRef,
         { title: newTitle.length > 0 ? newTitle.trim() : selectedItem.title },
         { merge: true }
       )
         .then(() => {
+          setUploaded(true);
           alert("Succesfully Added");
         })
         .catch((err) => console.log(err));
@@ -100,7 +102,7 @@ const AdminPortfolio__Edit = ({ setClose, selectedItem }) => {
     <div className="adminAddDeleteEdit">
       <div
         className="adminAddDeleteEdit__close"
-        onClick={() => setClose(false)}
+        onClick={() => setEditItemActive(false)}
       >
         <CloseSharpIcon />
       </div>

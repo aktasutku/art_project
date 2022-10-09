@@ -1,24 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 //MUI
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import DoneSharpIcon from "@mui/icons-material/DoneSharp";
+import UploadIcon from "@mui/icons-material/Upload";
+
 // random id generator
 import { v4 as uuidv4 } from "uuid";
 //Firebase
-import { addDoc } from "firebase/firestore/lite";
-import { portfolioItemsCol, storage } from "../../../firebase";
+import { addDoc } from "firebase/firestore";
+import { portfolioItemsCol, storage } from "../../../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-const AdminPortfolio__Add = ({ setClose }) => {
+// CONTEXT
+import { ActiveAddDeleteEditContext } from "../../../../app/features/Context/AddEditDeleteActiveCxt";
+
+const AdminPortfolio__Add = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  // VARIABLES
-  const [image, setImage] = useState(null);
+  //  VARIABLES
   const [title, setTitle] = useState("");
-  const [imgURL, setImgURL] = useState();
-  const [progress, setProgress] = useState();
   const [uploaded, setUploaded] = useState("");
+  const [progress, setProgress] = useState();
+  const [image, setImage] = useState(null);
+  const [imgURL, setImgURL] = useState();
+
+  // CONTEXT
+  const { addActive } = useContext(ActiveAddDeleteEditContext);
+  const [addItemActive, setAddItemActive] = addActive;
 
   //ADD-FIREBASE COLLECTION + STORAGE IMG
   const handleAdd = (e) => {
@@ -71,7 +80,8 @@ const AdminPortfolio__Add = ({ setClose }) => {
     <div className="adminAddDeleteEdit">
       <div
         className="adminAddDeleteEdit__close"
-        onClick={() => setClose(false)}
+        // CLOSE COMPONENT
+        onClick={() => setAddItemActive(false)}
       >
         <CloseSharpIcon />
       </div>
@@ -81,14 +91,15 @@ const AdminPortfolio__Add = ({ setClose }) => {
       <form className="adminAddDeleteEdit__form" onSubmit={(e) => handleAdd(e)}>
         <p>Add Mode</p>
         <div>
-          <p>Select Img : </p>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-            required
-            style={{ width: "190px" }}
-          />
+          <label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])}
+              required
+            />
+            <UploadIcon sx={{ cursor: "pointer" }} /> Upload Image
+          </label>
           {progress && (
             <p className="adminAddDeleteEdit__success">
               img status : {progress} % uploaded

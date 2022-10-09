@@ -6,9 +6,6 @@ import Shop_Page from "./pages/Shop_Page";
 import Product_Page from "./components/Product_Page";
 import Footer from "./components/Footer";
 import Not_Found from "./pages/Not_Found";
-import Counter from "./app/features/counter/Counter";
-import PostsList from "./features/posts/PostsList";
-import AddPostForm from "./features/posts/AddPostForm";
 import ShoppingBag_Page from "./pages/ShoppingBag_Page";
 import AboutMe_Page from "./pages/AboutMe_Page";
 import Portfolio_Page from "./pages/Portfolio_Page";
@@ -54,9 +51,6 @@ function App() {
 
         <Footer />
       </BrowserRouter>
-      {/* <Counter /> */}
-      {/* <AddPostForm />
-      <PostsList /> */}
     </div>
   );
 }

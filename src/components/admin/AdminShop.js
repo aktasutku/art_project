@@ -1,13 +1,28 @@
-import React, { useEffect, useState } from "react";
-import AdminHeader from "./AdminHeader";
-// import { shopItemsCol } from "../../firebase";
-import { onSnapshot, collection, getFirestore } from "firebase/firestore";
+import React, { useEffect, useState, useContext } from "react";
+import AdminImgCard from "./Helper/AdminImgCard";
+// FIREBASE
+import { onSnapshot, collection } from "firebase/firestore";
+// CONTEXT
+import { ActiveAddDeleteEditContext } from "../../app/features/Context/AddEditDeleteActiveCxt";
+import { SelectedItemCtx } from "../../app/features/Context/selectedItemCtx";
+import { db } from "../../firebase";
+import AdminPortfolio__Add from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Add";
+import AdminPortfolio__Delete from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Delete";
+import AdminPortfolio__Edit from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Edit";
+import AdminShop__Add from "./Helper/shop_AddDeleteEdit/AdminShop__Add";
 
 const AdminShop = () => {
   // VARIABLES
   const [shopItems, setShopItems] = useState([]);
+  // CONTEXT
+  const { addActive, editActive, deleteActive } = useContext(
+    ActiveAddDeleteEditContext
+  );
+  const [selectedItem, setSelectedItem] = useContext(SelectedItemCtx);
+  const [addItemActive, setAddItemActive] = addActive;
+  const [deleteItemActive, setDeleteItemActive] = deleteActive;
+  const [editItemActive, setEditItemActive] = editActive;
   // FIREBASE VARIABLES
-  const db = getFirestore();
   const shopItemsCol = collection(db, "shopItems");
 
   // GET SHOP COLLECTION DOCUMENETS
@@ -20,10 +35,23 @@ const AdminShop = () => {
       }),
     []
   );
+  console.log(selectedItem);
+
   return (
     <div className="adminPortfolio">
-      <AdminHeader />
-      AdminShop
+      <div className="adminPortfolio__Imgbody">
+        {/* Display DATABASE IMAGES */}
+        {shopItems.map((item) => {
+          return (
+            <AdminImgCard key={item.id} item={item} imagesUrl={item.images} />
+          );
+        })}
+      </div>
+      {addItemActive && <AdminShop__Add />}
+      {deleteItemActive && (
+        <AdminPortfolio__Delete setClose={setDeleteItemActive} />
+      )}
+      {editItemActive && <AdminPortfolio__Edit setClose={setEditItemActive} />}
     </div>
   );
 };
