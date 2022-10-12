@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 //MUI
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import DoneSharpIcon from "@mui/icons-material/DoneSharp";
+import UploadIcon from "@mui/icons-material/Upload";
 // random id generator
 import { v4 as uuidv4 } from "uuid";
 //Firebase
@@ -18,11 +19,12 @@ import {
   deleteObject,
   getDownloadURL,
   uploadBytesResumable,
+  uploadBytes,
 } from "firebase/storage";
-import { db, storage } from "../../../../firebase";
+import { db } from "../../../../firebase";
 import { ActiveAddDeleteEditContext } from "../../../../app/features/Context/AddEditDeleteActiveCxt";
 
-const AdminPortfolio__Edit = ({ setClose, selectedItem }) => {
+const AdminPortfolio__Edit = ({ selectedItem }) => {
   // CONTEXT
   const { editActive } = useContext(ActiveAddDeleteEditContext);
   const [editItemActive, setEditItemActive] = editActive;
@@ -35,62 +37,53 @@ const AdminPortfolio__Edit = ({ setClose, selectedItem }) => {
   const [uploaded, setUploaded] = useState("");
 
   //   FIREBASE VARIABLES
-  const updateSelectedItemColRef = doc(db, "portfolioItems", selectedItem.id);
-  const deleteExistingItemStorageRef = ref(storage, selectedItem.img);
-  const addNewItemStorageRef = ref(
+  const storage = getStorage();
+  const selectedItemColRef = doc(db, "portfolioItems", selectedItem.id);
+  const itemStorageRef = ref(storage, selectedItem.img);
+  const newItemStorageRef = ref(
     storage,
     `portfolioItems/${newImage?.name + uuidv4()}`
   );
-  const uploadTask = uploadBytesResumable(addNewItemStorageRef, newImage);
 
+  console.log(newImage);
   const handleEdit = () => {
     if (newImage) {
-      deleteObject(deleteExistingItemStorageRef)
+      const uploadTask = uploadBytesResumable(newItemStorageRef, newImage);
+      deleteObject(itemStorageRef)
         .then(() => {
-          // If old image deleted from the storage upload new image
           uploadTask.on(
             "state_changed",
             (snapshot) => {
               setProgress(
-                // This not working properly sometimes dosent give me the value
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
               );
-              console.log(snapshot);
             },
-            (error) => {
-              console.log(error);
-            },
-            async () => {
-              // Get ImageURL
-              await getDownloadURL(uploadTask.snapshot.ref)
-                .then((downloadURL) => {
-                  setNewImgURL(downloadURL);
-                  //   Update Collection Document
-                  setDoc(updateSelectedItemColRef, {
-                    img: downloadURL,
-                    title: newTitle.length > 0 ? newTitle : selectedItem.title,
-                  })
-                    .then(() => {
-                      alert("Succesfully Added");
-                    })
-                    .catch((err) => console.log(err));
+            (err) => console.log(err),
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                setNewImgURL(url);
+                setDoc(selectedItemColRef, {
+                  img: url,
+                  title: newTitle.length > 0 ? newTitle : selectedItem.title,
                 })
-                .catch((err) => console.log(err));
+                  .then(() => {
+                    // alert("Succesfully Added");
+                    setUploaded(true);
+                  })
+                  .catch((err) => console.log(err));
+              });
             }
           );
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err));
     } else if (!newImage && newTitle.trim() !== "") {
       setDoc(
-        updateSelectedItemColRef,
+        selectedItemColRef,
         { title: newTitle.length > 0 ? newTitle.trim() : selectedItem.title },
         { merge: true }
       )
         .then(() => {
           setUploaded(true);
-          alert("Succesfully Added");
         })
         .catch((err) => console.log(err));
     } else {
@@ -129,15 +122,17 @@ const AdminPortfolio__Edit = ({ setClose, selectedItem }) => {
         </div>
 
         <div>
-          <p>Select Img : </p>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setNewImage(e.target.files[0])}
-            style={{ width: "190px" }}
-          />
-
-          {progress && (
+          <label>
+            <input
+              className="adminAddDeleteEdit__form__file"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setNewImage(e.target.files[0])}
+              required
+            />
+            <UploadIcon sx={{ cursor: "pointer" }} /> Upload Image
+          </label>
+          {uploaded && (
             <p className="adminAddDeleteEdit__success">
               img status : {progress} % uploaded
               <DoneSharpIcon sx={{ color: "green" }} />

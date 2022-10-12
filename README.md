@@ -4,6 +4,7 @@ I will work on
 
 - Firebase data upload for Admin in process..
 - Keep working on Admin Panel in process..
+- Add RealTime Chat admin with Client
 - SignIn Pop-Up dosent show on the phone
 - uploadbytes upload bunch of undefined images to storage how to figure out ?
 - Add contact me page

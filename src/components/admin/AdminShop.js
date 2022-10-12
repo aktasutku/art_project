@@ -35,18 +35,17 @@ const AdminShop = () => {
       }),
     []
   );
-  console.log(selectedItem);
 
   return (
-    <div className="adminPortfolio">
-      <div className="adminPortfolio__Imgbody">
-        {/* Display DATABASE IMAGES */}
-        {shopItems.map((item) => {
-          return (
+    <div className="adminPages">
+      {(!addItemActive && !deleteItemActive && !editItemActive) && (
+        <div className="adminPages__Imgbody">
+          {/* Display DATABASE IMAGES */}
+          {shopItems.map((item) => (
             <AdminImgCard key={item.id} item={item} imagesUrl={item.images} />
-          );
-        })}
-      </div>
+          ))}
+        </div>
+      )}
       {addItemActive && <AdminShop__Add />}
       {deleteItemActive && (
         <AdminPortfolio__Delete setClose={setDeleteItemActive} />

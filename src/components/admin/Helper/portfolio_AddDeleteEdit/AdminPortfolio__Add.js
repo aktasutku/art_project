@@ -93,6 +93,7 @@ const AdminPortfolio__Add = () => {
         <div>
           <label>
             <input
+              className="adminAddDeleteEdit__form__file"
               type="file"
               accept="image/*"
               onChange={(e) => setImage(e.target.files[0])}

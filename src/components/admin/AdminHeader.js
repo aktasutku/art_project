@@ -31,9 +31,6 @@ const AdminHeader = () => {
       setAddItemActive(true);
     } else if (name.includes("delete")) {
       selectedItem ? setDeleteItemActive(true) : alert("Item not selected");
-      // setAddItemActive(false);
-      // setDeleteItemActive(true);
-      // setEditItemActive(false);
     } else if (name.includes("edit")) {
       selectedItem ? setEditItemActive(true) : alert("Item not selected");
     }

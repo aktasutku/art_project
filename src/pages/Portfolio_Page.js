@@ -1,4 +1,4 @@
-import React, { useEffect, useState, forceUpdate } from "react";
+import React, { useEffect, useState } from "react";
 import "./Portfolio_Page.css";
 //MUI
 import Box from "@mui/material/Box";
@@ -12,22 +12,17 @@ import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutl
 import "animate.css";
 //Firebase
 import { portfolioItemsCol } from "../firebase";
-import { getDocs } from "firebase/firestore/lite";
+import { getDocs } from "firebase/firestore";
 
-//Images jSON
-// const portfolio = require("../portfolioItems.json");
-// portfolio.portfolioItemData.map(()=>) if you want to switch to json file
 
 const PortfolioPage = () => {
   const [open, setOpen] = useState(false);
   const [singleItem, setSingleItem] = useState({});
   const [portfolioItems, setPortfolioItems] = useState([]);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   //Set Firebase Data
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getPortfolioItems = async () => {
       const firestoreData = await getDocs(portfolioItemsCol);
       setPortfolioItems(

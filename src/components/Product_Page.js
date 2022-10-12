@@ -64,17 +64,6 @@ const Product_Page = () => {
     getShopItem();
   }, []);
 
-  //Bring the item by the id
-  // useEffect(() => {
-  //   for json file
-  //   myItems.items.map((item) => {
-  //   shopItem.find((item) => {
-  //     if (item.id == id) {
-  //       setCurrentData(item);
-  //     }
-  //   });
-  // }, [id]);
-
   const handleAdd = () => {
     if (qty > 0) {
       if (Boolean(cartItems.find((item) => item.id === currentData.id))) {

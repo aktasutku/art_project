@@ -11,7 +11,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth, socialLinksCol } from "../firebase";
-import { getDoc, doc } from "firebase/firestore/lite";
+import { getDoc, doc } from "firebase/firestore";
 //Redux
 import userSlice from "../app/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";

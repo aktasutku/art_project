@@ -13,44 +13,50 @@ import Admin_Page from "./pages/Admin_Page";
 //redux
 import { selectUserName } from "./app/features/user/userSlice";
 import { useSelector } from "react-redux";
+import ActiveAddDeleteEditProvider from "./app/features/Context/AddEditDeleteActiveCxt";
+import SelectedItemProvider from "./app/features/Context/selectedItemCtx";
 
 function App() {
   const adminName = useSelector(selectUserName);
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
+      <ActiveAddDeleteEditProvider>
+        <SelectedItemProvider>
+          <BrowserRouter>
+            <Header />
 
-        <Routes>
-          {/* Clieant Side */}
-          <Route path="/art_project" element={<Home />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/shop">
-            <Route index element={<Shop_Page />} />
-            <Route path="product/:id" element={<Product_Page />} />
-          </Route>
-          <Route path="/portfolio" element={<Portfolio_Page />} />
-          <Route path="/about-me" element={<AboutMe_Page />} />
-          <Route path="/shopping-bag" element={<ShoppingBag_Page />} />
+            <Routes>
+              {/* Clieant Side */}
+              <Route path="/art_project" element={<Home />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/shop">
+                <Route index element={<Shop_Page />} />
+                <Route path="product/:id" element={<Product_Page />} />
+              </Route>
+              <Route path="/portfolio" element={<Portfolio_Page />} />
+              <Route path="/about-me" element={<AboutMe_Page />} />
+              <Route path="/shopping-bag" element={<ShoppingBag_Page />} />
 
-          {/* ADMIN */}
-          <Route
-            path="/admin"
-            element={adminName ? <Admin_Page /> : <Not_Found />}
-          >
-            <Route path="home" element={<Admin_Page />} />
-            <Route path="shop" element={<Admin_Page />} />
-            <Route path="portfolio" element={<Admin_Page />} />
-            <Route path="about-me" element={<Admin_Page />} />
-            <Route path="behind-the-scenes" element={<Admin_Page />} />
-          </Route>
+              {/* ADMIN */}
+              <Route
+                path="/admin"
+                element={adminName ? <Admin_Page /> : <Not_Found />}
+              >
+                <Route path="home" element={<Admin_Page />} />
+                <Route path="shop" element={<Admin_Page />} />
+                <Route path="portfolio" element={<Admin_Page />} />
+                <Route path="about-me" element={<Admin_Page />} />
+                <Route path="behind-the-scenes" element={<Admin_Page />} />
+              </Route>
 
-          <Route path="*" element={<Not_Found />} />
-        </Routes>
+              <Route path="*" element={<Not_Found />} />
+            </Routes>
 
-        <Footer />
-      </BrowserRouter>
+            <Footer />
+          </BrowserRouter>
+        </SelectedItemProvider>
+      </ActiveAddDeleteEditProvider>
     </div>
   );
 }

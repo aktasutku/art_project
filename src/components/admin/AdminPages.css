@@ -1,13 +1,14 @@
-.adminPortfolio {
+.adminPages {
   width: 100%;
   height: 100%;
+  min-height: max-content;
   border-radius: var(--admin-borderRadius);
   position: relative;
   padding: 5px 0 5px 5px;
 }
 
 /* Body */
-.adminPortfolio__Imgbody {
+.adminPages__Imgbody {
   /* position: relative; */
   margin-top: var(--admin-headerHeight);
   /* border: 1px solid black; */
@@ -20,12 +21,9 @@
 
 /*********************** GLOBAL CLASSES FOR CHILDRENS **********************/
 .adminAddDeleteEdit {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  border-radius: var(--admin-borderRadius);
+  width: 100%;
   height: 100%;
-  z-index: 10;
   background-color: var(--second-color);
   border-radius: var(--admin-borderRadius);
   display: flex;
@@ -40,20 +38,21 @@
   cursor: pointer;
 }
 .adminAddDeleteEdit__img {
-  height: max-content;
+  height: auto;
   min-height: 200px;
-  max-height: 100%;
+  max-height: 400px;
   width: auto;
   min-width: 200px;
   max-width: 600px;
-  display: flex;
-  justify-content: center;
   border: 3px solid var(--main-color);
   border-radius: var(--admin-borderRadius);
+  /* overflow: hidden; */
 }
 .adminAddDeleteEdit__img img {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  max-height: 100%;
   object-fit: contain;
   border-radius: var(--admin-borderRadius);
 }
@@ -67,7 +66,9 @@
 }
 .adminAddDeleteEdit__form div {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
   gap: 5px;
   width: max-content;
 }
@@ -76,7 +77,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 1px solid;
   border-radius: var(--admin-borderRadius);
   cursor: pointer;
   transition: color 0.2s ease-in-out;
@@ -86,8 +86,11 @@
   background-color: var(--main-color);
   color: var(--second-color);
 }
-.adminAddDeleteEdit__form input {
+.adminAddDeleteEdit__form__file {
   display: none;
+}
+.adminAddDeleteEdit__form input {
+  max-width: 200px;
 }
 /* check .adminAddDeleteEdit__buttons for problems if any there */
 .adminAddDeleteEdit__buttons {

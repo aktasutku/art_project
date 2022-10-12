@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./AdminPortfolio.css";
+import "./AdminPages.css";
 import AdminPortfolio__Add from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Add";
 import AdminPortfolio__Delete from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Delete";
 import AdminPortfolio__Edit from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Edit";
@@ -32,11 +32,11 @@ const AdminPortfolio = () => {
     ActiveAddDeleteEditContext
   );
   // GET SELECTED ITEM FROM IMG CARD
-  const [selectedItem, setSelectedItem] = useContext(SelectedItemCtx);
+  const [selectedItem] = useContext(SelectedItemCtx);
   // OPEN CLOSE COMPONENTS
-  const [addItemActive, setAddItemActive] = addActive;
-  const [deleteItemActive, setDeleteItemActive] = deleteActive;
-  const [editItemActive, setEditItemActive] = editActive;
+  const [addItemActive] = addActive;
+  const [deleteItemActive] = deleteActive;
+  const [editItemActive] = editActive;
 
   // GET PORTFOLIO COLLECTION DOCUMENTS
   useEffect(
@@ -50,10 +50,10 @@ const AdminPortfolio = () => {
   );
 
   return (
-    <div className="adminPortfolio">
-      {(!addItemActive || !deleteItemActive || !editItemActive) && (
+    <div className="adminPages">
+      {!addItemActive && !deleteItemActive && !editItemActive && (
         <>
-          <div className="adminPortfolio__Imgbody">
+          <div className="adminPages__Imgbody">
             {/* Display DATABASE IMAGES */}
             {portfolioItems.map((item) => {
               return (

@@ -1,33 +1,40 @@
-import React from "react";
-import Sidebar from "../components/admin/Sidebar";
+import React, { useContext } from "react";
 import "./Admin_Page.css";
+// Admin components
+import Sidebar from "../components/admin/Sidebar";
 import AdminPortfolio from "../components/admin/AdminPortfolio";
 import AdminShop from "../components/admin/AdminShop";
-// import { selectUserName } from "../app/features/user/userSlice";
-// import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import ActiveAddDeleteEditProvider from "../app/features/Context/AddEditDeleteActiveCxt";
-import SelectedItemProvider from "../app/features/Context/selectedItemCtx";
 import AdminHeader from "../components/admin/AdminHeader";
+// React Router
+import { useLocation } from "react-router-dom";
+// Context
+import { ActiveAddDeleteEditContext } from "../app/features/Context/AddEditDeleteActiveCxt";
 
 const Admin_Page = () => {
   // const adminName = useSelector(selectUserName);
   const url = useLocation();
   const pathname = url.pathname;
 
+  //CONTEXT
+  const { addActive, editActive, deleteActive } = useContext(
+    ActiveAddDeleteEditContext
+  );
+
+  const [addItemActive] = addActive;
+  const [deleteItemActive] = deleteActive;
+  const [editItemActive] = editActive;
+
   return (
-    <ActiveAddDeleteEditProvider>
-      <SelectedItemProvider>
-        <div className="adminPage">
-          <Sidebar />
-          <div className="adminPage__content">
-            <AdminHeader />
-            {pathname.includes("portfolio") && <AdminPortfolio />}
-            {pathname.includes("shop") && <AdminShop />}
-          </div>
-        </div>
-      </SelectedItemProvider>
-    </ActiveAddDeleteEditProvider>
+    <div className="adminPage">
+      <Sidebar />
+      <div className="adminPage__content">
+        {!addItemActive && !deleteItemActive && !editItemActive && (
+          <AdminHeader />
+        )}
+        {pathname.includes("portfolio") && <AdminPortfolio />}
+        {pathname.includes("shop") && <AdminShop />}
+      </div>
+    </div>
   );
 };
 
