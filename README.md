@@ -13,9 +13,7 @@ I will work on
 - Recent Art Project pages
 - Customized Portrait
 - handle email subscription
-- I am getting photURL 403 error for admin page
 - Firebase authentication take it to do header
 - add timestamp to firebase so if img loaded in last 3 days (orderBY check this command) show NewArt on productCard
-- https://www.youtube.com/watch?v=YOAeBSCkArA&t=916s check this link for upload images
 
 
