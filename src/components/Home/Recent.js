@@ -22,8 +22,8 @@ const Recent = () => {
       </div>
       <div className="recent__img">
         {recentImg.map((img) => (
-          <LazyLoad>
-            <img src={img} key={img} />
+          <LazyLoad key={img}>
+            <img src={img} />
           </LazyLoad>
         ))}
       </div>

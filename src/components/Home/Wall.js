@@ -13,7 +13,7 @@ const Wall = () => {
       <h1>Wall Art Prints</h1>
       <div className="wall__img">
         {images.map((img) => (
-          <LazyLoad>
+          <LazyLoad key={img}>
             <img src={img} />
           </LazyLoad>
         ))}

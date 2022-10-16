@@ -20,8 +20,8 @@ import {
   uploadBytes,
   uploadBytesResumable,
 } from "firebase/storage";
-import { storage, shopItemsCol } from "../../../../firebase";
-import { addDoc } from "firebase/firestore";
+import { storage, shopItemsCol, db } from "../../../../firebase";
+import { addDoc, doc, setDoc } from "firebase/firestore";
 
 const AdminShop__Add = () => {
   useEffect(() => {
@@ -42,10 +42,12 @@ const AdminShop__Add = () => {
   const [addItemActive, setAddItemActive] = addActive;
   // FIREBASE TOOLS
   const [storageImgsRef, setStorageImgsRef] = useState([]);
-  const [storageImgsURL, setStorageImgsURL] = useState([]);
+  // var storageImgsURL = [];
+  const [statusDict, setStatusDict] = useState({});
+  const statusURLs = Object.values(statusDict);
 
-  const handleCleanForm = (e) => {
-    e.preventDefault();
+  const handleCleanForm = () => {
+    // e.preventDefault();
     setImages([]);
     setTitle("");
     setPrice("");
@@ -64,39 +66,87 @@ const AdminShop__Add = () => {
     }
   }, [localImages]);
 
+  // solution one
+  // const handleAdd = (e) => {
+  //   e.preventDefault();
+
+  //   storageImgsRef.map((imgStorageRef) => {
+  //     const image = localImages[storageImgsRef.indexOf(imgStorageRef)];
+  //     const uploadTask = uploadBytesResumable(imgStorageRef, image);
+
+  //     uploadTask.on(
+  //       "state_changed",
+  //       (snapshot) => {},
+  //       (error) => {
+  //         console.log(error);
+  //       },
+  //       () => {
+  //         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+  //           // setStorageImgsURL((prev) => [...prev, url]);
+  //           storageImgsURL.push(url);
+  //           if (
+  //             storageImgsRef.length - 1 ==
+  //             storageImgsRef.indexOf(imgStorageRef)
+  //           ) {
+  //             addDoc(shopItemsCol, {
+  //               description: description,
+  //               discount: discount,
+  //               price: price,
+  //               title: title,
+  //               images: [...storageImgsURL],
+  //             }).then(() => {
+  //               setUploaded(true);
+  //             });
+  //           }
+  //         });
+  //       }
+  //     );
+  //   });
+  // };
+
   const handleAdd = (e) => {
     e.preventDefault();
+    setStatusDict(
+      Object.fromEntries(
+        storageImgsRef.map((imgStorageRef) => [imgStorageRef, null])
+      )
+    );
+    storageImgsRef.map((imgStorageRef) => {
+      const image = localImages[storageImgsRef.indexOf(imgStorageRef)];
+      const uploadTask = uploadBytesResumable(imgStorageRef, image);
 
-    Promise.all(
-      storageImgsRef.map((imgStorageRef) => {
-        const image = localImages[storageImgsRef.indexOf(imgStorageRef)];
-        const uploadTask = uploadBytesResumable(imgStorageRef, image);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+            setStatusDict((prevStatus) => ({
+              ...prevStatus,
+              [imgStorageRef]: url,
+            }));
+          });
+        }
+      );
+    });
+  };
 
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {},
-          (error) => {
-            console.log(error);
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-              setStorageImgsURL((prev) => [...prev, url]);
-            });
-          }
-        );
-      })
-    ).then(() => addToCol());
-
-    const addToCol = () => {
+  useEffect(() => {
+    if (statusURLs.length && statusURLs.every((value) => value !== null)) {
       addDoc(shopItemsCol, {
         description: description,
         discount: discount,
         price: price,
         title: title,
-        images: [storageImgsURL.map((url) => url)],
+        images: [...statusURLs],
+      }).then(() => {
+        setUploaded(true);
       });
-    };
-  };
+      setStatusDict({});
+    }
+  }, [statusURLs]);
 
   return (
     <div className="adminAddDeleteEdit">
@@ -131,7 +181,7 @@ const AdminShop__Add = () => {
           {uploaded && (
             <p className="adminAddDeleteEdit__success">
               ( {uploaded} <DoneSharpIcon sx={{ color: "green" }} />
-              Uploaded)
+              Added)
             </p>
           )}
         </div>

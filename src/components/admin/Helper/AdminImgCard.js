@@ -10,13 +10,7 @@ import { Navigation, A11y, EffectFade, Mousewheel } from "swiper";
 // CONTEXT
 import { SelectedItemCtx } from "../../../app/features/Context/selectedItemCtx";
 
-const AdminImgCard = ({
-  item,
-  // sendSelected,
-  // selectedId,
-  imageUrl,
-  imagesUrl,
-}) => {
+const AdminImgCard = ({ item, imageUrl, imagesUrl }) => {
   const url = useLocation();
   const pathname = url.pathname;
 
