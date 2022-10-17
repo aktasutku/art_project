@@ -3,25 +3,20 @@ import React, { useState, useContext, useEffect } from "react";
 import { ActiveAddDeleteEditContext } from "../../../../app/features/Context/AddEditDeleteActiveCxt";
 // RANDOM CHARACTERS
 import { v4 as uuidv4 } from "uuid";
-//MUI
-import CloseSharpIcon from "@mui/icons-material/CloseSharp";
-import DoneSharpIcon from "@mui/icons-material/DoneSharp";
-import UploadIcon from "@mui/icons-material/Upload";
-import { TextField } from "@mui/material";
 // SWIPER
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, A11y, EffectFade, Mousewheel } from "swiper";
+//MUI
+import CloseSharpIcon from "@mui/icons-material/CloseSharp";
+import DoneSharpIcon from "@mui/icons-material/DoneSharp";
+import UploadIcon from "@mui/icons-material/Upload";
+
 // FIREBASE
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage";
-import { storage, shopItemsCol, db } from "../../../../firebase";
-import { addDoc, doc, setDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { storage, shopItemsCol } from "../../../../firebase";
+import { addDoc } from "firebase/firestore";
 
 const AdminShop__Add = () => {
   useEffect(() => {
@@ -42,12 +37,9 @@ const AdminShop__Add = () => {
   const [addItemActive, setAddItemActive] = addActive;
   // FIREBASE TOOLS
   const [storageImgsRef, setStorageImgsRef] = useState([]);
-  // var storageImgsURL = [];
-  const [statusDict, setStatusDict] = useState({});
-  const statusURLs = Object.values(statusDict);
+  const [storageImgsURL, setStorageImgsURL] = useState([]);
 
   const handleCleanForm = () => {
-    // e.preventDefault();
     setImages([]);
     setTitle("");
     setPrice("");
@@ -66,51 +58,9 @@ const AdminShop__Add = () => {
     }
   }, [localImages]);
 
-  // solution one
-  // const handleAdd = (e) => {
-  //   e.preventDefault();
-
-  //   storageImgsRef.map((imgStorageRef) => {
-  //     const image = localImages[storageImgsRef.indexOf(imgStorageRef)];
-  //     const uploadTask = uploadBytesResumable(imgStorageRef, image);
-
-  //     uploadTask.on(
-  //       "state_changed",
-  //       (snapshot) => {},
-  //       (error) => {
-  //         console.log(error);
-  //       },
-  //       () => {
-  //         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-  //           // setStorageImgsURL((prev) => [...prev, url]);
-  //           storageImgsURL.push(url);
-  //           if (
-  //             storageImgsRef.length - 1 ==
-  //             storageImgsRef.indexOf(imgStorageRef)
-  //           ) {
-  //             addDoc(shopItemsCol, {
-  //               description: description,
-  //               discount: discount,
-  //               price: price,
-  //               title: title,
-  //               images: [...storageImgsURL],
-  //             }).then(() => {
-  //               setUploaded(true);
-  //             });
-  //           }
-  //         });
-  //       }
-  //     );
-  //   });
-  // };
-
   const handleAdd = (e) => {
     e.preventDefault();
-    setStatusDict(
-      Object.fromEntries(
-        storageImgsRef.map((imgStorageRef) => [imgStorageRef, null])
-      )
-    );
+
     storageImgsRef.map((imgStorageRef) => {
       const image = localImages[storageImgsRef.indexOf(imgStorageRef)];
       const uploadTask = uploadBytesResumable(imgStorageRef, image);
@@ -123,30 +73,27 @@ const AdminShop__Add = () => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            setStatusDict((prevStatus) => ({
-              ...prevStatus,
-              [imgStorageRef]: url,
-            }));
+            setStorageImgsURL((prev) => [...prev, url]);
           });
         }
       );
     });
   };
 
+  // ADD DOC TO COLLECTION AFTER IMAGES ARE UPLOADED TO STORAGE
   useEffect(() => {
-    if (statusURLs.length && statusURLs.every((value) => value !== null)) {
+    storageImgsURL.length > 0 &&
+      storageImgsURL.length === storageImgsRef.length &&
       addDoc(shopItemsCol, {
         description: description,
         discount: discount,
         price: price,
         title: title,
-        images: [...statusURLs],
+        images: [...storageImgsURL],
       }).then(() => {
         setUploaded(true);
       });
-      setStatusDict({});
-    }
-  }, [statusURLs]);
+  }, [storageImgsURL]);
 
   return (
     <div className="adminAddDeleteEdit">
@@ -246,3 +193,92 @@ const AdminShop__Add = () => {
 };
 
 export default AdminShop__Add;
+
+// OBJECT SOLUTION
+
+// const [statusDict, setStatusDict] = useState({});
+// const statusURLs = Object.values(statusDict);
+
+// const handleAdd = (e) => {
+//   e.preventDefault();
+//   setStatusDict(
+//     Object.fromEntries(
+//       storageImgsRef.map((imgStorageRef) => [imgStorageRef, null])
+//     )
+//   );
+//   storageImgsRef.map((imgStorageRef) => {
+//     const image = localImages[storageImgsRef.indexOf(imgStorageRef)];
+//     const uploadTask = uploadBytesResumable(imgStorageRef, image);
+
+//     uploadTask.on(
+//       "state_changed",
+//       (snapshot) => {},
+//       (error) => {
+//         console.log(error);
+//       },
+//       () => {
+//         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+//           setStatusDict((prevStatus) => ({
+//             ...prevStatus,
+//             [imgStorageRef]: url,
+//           }));
+//         });
+//       }
+//     );
+//   });
+// };
+
+// useEffect(() => {
+//   if (statusURLs.length && statusURLs.every((value) => value !== null)) {
+//     addDoc(shopItemsCol, {
+//       description: description,
+//       discount: discount,
+//       price: price,
+//       title: title,
+//       images: [...statusURLs],
+//     }).then(() => {
+//       setUploaded(true);
+//     });
+//     setStatusDict({});
+//   }
+// }, [statusURLs]);
+
+// GLOBAL VARIABLE SOLUTION
+
+// var storageImgsURL = [];
+// const handleAdd = (e) => {
+//   e.preventDefault();
+
+//   storageImgsRef.map((imgStorageRef) => {
+//     const image = localImages[storageImgsRef.indexOf(imgStorageRef)];
+//     const uploadTask = uploadBytesResumable(imgStorageRef, image);
+
+//     uploadTask.on(
+//       "state_changed",
+//       (snapshot) => {},
+//       (error) => {
+//         console.log(error);
+//       },
+//       () => {
+//         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+//           // setStorageImgsURL((prev) => [...prev, url]);
+//           storageImgsURL.push(url);
+//           if (
+//             storageImgsRef.length - 1 ==
+//             storageImgsRef.indexOf(imgStorageRef)
+//           ) {
+//             addDoc(shopItemsCol, {
+//               description: description,
+//               discount: discount,
+//               price: price,
+//               title: title,
+//               images: [...storageImgsURL],
+//             }).then(() => {
+//               setUploaded(true);
+//             });
+//           }
+//         });
+//       }
+//     );
+//   });
+// };

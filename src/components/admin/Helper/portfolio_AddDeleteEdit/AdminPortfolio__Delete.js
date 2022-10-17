@@ -14,7 +14,11 @@ const AdminPortfolio__Delete = ({ selectedItem }) => {
   const [deleteItemActive, setDeleteItemActive] = deleteActive;
 
   const selectedItemColRef = doc(db, "portfolioItems", selectedItem.id);
-  const selectedItemStorageRef = ref(storage, selectedItem.img);
+  const selectedItemStorageRef = ref(
+    storage,
+    "portfolioItems",
+    selectedItem.img
+  );
 
   const [deleteButtonActive, setDeleteButtonActive] = useState(false);
   const [deleteSureActive, setDeleteSureActive] = useState(false);
@@ -23,7 +27,7 @@ const AdminPortfolio__Delete = ({ selectedItem }) => {
     // DELETE IMG FROM STORAGE
     deleteObject(selectedItemStorageRef)
       .then(() => {
-        console.log("storaged deleted");
+        console.log("storage deleted");
       })
       .catch((err) => {
         console.log(err);
@@ -52,7 +56,7 @@ const AdminPortfolio__Delete = ({ selectedItem }) => {
       </div>
       <div className="adminAddDeleteEdit__form ">
         <p>Delete Mode</p>
-        <div className="adminflexRow">
+        <div>
           <p>Title : </p>
           <p>{selectedItem.title}</p>
         </div>

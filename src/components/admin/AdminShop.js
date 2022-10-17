@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
-import AdminImgCard from "./Helper/AdminImgCard";
 // FIREBASE
 import { onSnapshot, collection } from "firebase/firestore";
+import { db } from "../../firebase";
 // CONTEXT
 import { ActiveAddDeleteEditContext } from "../../app/features/Context/AddEditDeleteActiveCxt";
 import { SelectedItemCtx } from "../../app/features/Context/selectedItemCtx";
-import { db } from "../../firebase";
-import AdminPortfolio__Add from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Add";
-import AdminPortfolio__Delete from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Delete";
-import AdminPortfolio__Edit from "./Helper/portfolio_AddDeleteEdit/AdminPortfolio__Edit";
+// HELPER
 import AdminShop__Add from "./Helper/shop_AddDeleteEdit/AdminShop__Add";
+import AdminShop__Delete from "./Helper/shop_AddDeleteEdit/AdminShop__Delete";
+import AdminShop__Edit from "./Helper/shop_AddDeleteEdit/AdminShop__Edit";
+import AdminImgCard from "./Helper/AdminImgCard";
 
 const AdminShop = () => {
   // VARIABLES
@@ -38,7 +38,7 @@ const AdminShop = () => {
 
   return (
     <div className="adminPages">
-      {(!addItemActive && !deleteItemActive && !editItemActive) && (
+      {!addItemActive && !deleteItemActive && !editItemActive && (
         <div className="adminPages__Imgbody">
           {/* Display DATABASE IMAGES */}
           {shopItems.map((item) => (
@@ -47,10 +47,8 @@ const AdminShop = () => {
         </div>
       )}
       {addItemActive && <AdminShop__Add />}
-      {deleteItemActive && (
-        <AdminPortfolio__Delete setClose={setDeleteItemActive} />
-      )}
-      {editItemActive && <AdminPortfolio__Edit setClose={setEditItemActive} />}
+      {deleteItemActive && <AdminShop__Delete selectedItem={selectedItem} />}
+      {editItemActive && <AdminShop__Edit selectedItem={selectedItem} />}
     </div>
   );
 };

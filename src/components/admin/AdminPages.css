@@ -92,6 +92,7 @@
 .adminAddDeleteEdit__form input {
   max-width: 200px;
 }
+
 /* check .adminAddDeleteEdit__buttons for problems if any there */
 .adminAddDeleteEdit__buttons {
   margin-top: 10px;
