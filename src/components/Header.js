@@ -23,6 +23,7 @@ import {
   selectUserName,
   setUserSignOut,
   setUserLoginDetails,
+  selectAdmin,
 } from "../app/features/user/userSlice";
 
 const Header = () => {
@@ -35,9 +36,9 @@ const Header = () => {
   const cartItems = useSelector(selectAllCartItems);
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
-  // const userPhoto = useSelector(selectUserPhoto);
-  // const userEmail = useSelector(selectUserEmail);
+  const admin = useSelector(selectAdmin);
 
+  // Local Variables
   const [display, setDisplay] = useState(false);
   // className variables
   const activeHeader = ({ isActive }) => (isActive ? "headerActive" : "");
@@ -54,6 +55,8 @@ const Header = () => {
         name: user?.displayName,
         email: user?.email,
         photo: user?.photoURL,
+        uid: user?.uid,
+        admin: user?.uid == process.env.REACT_APP_adminID ? true : false,
       })
     );
   };
@@ -70,7 +73,7 @@ const Header = () => {
       signInWithPopup(auth, provider)
         .then((result) => {
           setUser(result.user);
-          navigate("/admin");
+          admin && navigate("/admin");
         })
         .catch((error) => {
           console.log(error.message);
@@ -124,8 +127,12 @@ const Header = () => {
             <p onClick={handleAuth}>Sign in</p>
           ) : (
             <div className="header__bag__signedIn">
-              <p onClick={() => navigate("admin")}>Admin</p>
-              <div>|</div>
+              {admin && (
+                <>
+                  <p onClick={() => navigate("admin")}>Admin</p>
+                  <div>|</div>
+                </>
+              )}
               <p onClick={handleAuth}>Logout</p>
             </div>
           )}

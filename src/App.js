@@ -11,13 +11,15 @@ import AboutMe_Page from "./pages/AboutMe_Page";
 import Portfolio_Page from "./pages/Portfolio_Page";
 import Admin_Page from "./pages/Admin_Page";
 //redux
-import { selectUserName } from "./app/features/user/userSlice";
+import { selectUserName, selectAdmin } from "./app/features/user/userSlice";
 import { useSelector } from "react-redux";
 import ActiveAddDeleteEditProvider from "./app/features/Context/AddEditDeleteActiveCxt";
 import SelectedItemProvider from "./app/features/Context/selectedItemCtx";
 
 function App() {
-  const adminName = useSelector(selectUserName);
+  const admin = useSelector(selectAdmin);
+  // const adminName = useSelector(selectUserName);
+  console.log(admin);
 
   return (
     <div className="App">
@@ -41,7 +43,7 @@ function App() {
               {/* ADMIN */}
               <Route
                 path="/admin"
-                element={adminName ? <Admin_Page /> : <Not_Found />}
+                element={admin ? <Admin_Page /> : <Not_Found />}
               >
                 <Route path="home" element={<Admin_Page />} />
                 <Route path="shop" element={<Admin_Page />} />
