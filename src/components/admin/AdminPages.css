@@ -36,6 +36,7 @@
   top: 20px;
   right: 20px;
   cursor: pointer;
+  z-index: 10;
 }
 .adminAddDeleteEdit__img {
   height: auto;
@@ -46,6 +47,8 @@
   max-width: 600px;
   border: 3px solid var(--main-color);
   border-radius: var(--admin-borderRadius);
+  display: flex;
+  justify-content: center;
   /* overflow: hidden; */
 }
 .adminAddDeleteEdit__img img {
@@ -55,6 +58,7 @@
   max-height: 100%;
   object-fit: contain;
   border-radius: var(--admin-borderRadius);
+
 }
 
 .adminAddDeleteEdit__form {

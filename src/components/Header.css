@@ -45,7 +45,7 @@
 .header__list {
   display: flex;
   flex: 5;
-  font-size: 1.4rem;
+  font-size: var(--header-fontSize);
 }
 
 .header__list ul {
@@ -84,11 +84,22 @@
 .header__bag {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 5px;
   cursor: pointer;
   flex: 1;
+  font-size: var(--header-fontSize);
+}
+.header__bag__signIn{
+  width: max-content;
+}
+.header__bag__signedIn{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
 }
 
 .header__bag__container {
