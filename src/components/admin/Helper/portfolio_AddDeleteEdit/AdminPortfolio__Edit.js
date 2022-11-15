@@ -38,6 +38,7 @@ const AdminPortfolio__Edit = ({ selectedItem }) => {
     `portfolioItems/${newImage?.name + uuidv4()}`
   );
 
+
   console.log(newImage);
   const handleEdit = () => {
     if (newImage) {

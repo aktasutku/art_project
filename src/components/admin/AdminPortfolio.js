@@ -57,7 +57,12 @@ const AdminPortfolio = () => {
             {/* Display DATABASE IMAGES */}
             {portfolioItems.map((item) => {
               return (
-                <AdminImgCard key={item.id} item={item} imageUrl={item.img} />
+                <AdminImgCard
+                  key={item.id}
+                  item={item}
+                  imageUrl={item.img}
+                  type={"single"}
+                />
               );
             })}
           </div>

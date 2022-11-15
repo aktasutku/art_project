@@ -127,6 +127,7 @@ const Header = () => {
             <p onClick={handleAuth}>Sign in</p>
           ) : (
             <div className="header__bag__signedIn">
+            {/* if admin true show me admin panel */}
               {admin && (
                 <>
                   <p onClick={() => navigate("admin")}>Admin</p>

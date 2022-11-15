@@ -52,3 +52,9 @@
 .adminPortfolio__header__icon:hover > p {
   display: block;
 }
+
+@media only screen and (max-width: 480px) {
+  .adminPage {
+    padding: 10px 8px 10px 60px;
+  }
+}

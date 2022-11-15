@@ -10,9 +10,9 @@ import { Navigation, A11y, EffectFade, Mousewheel } from "swiper";
 // CONTEXT
 import { SelectedItemCtx } from "../../../app/features/Context/selectedItemCtx";
 
-const AdminImgCard = ({ item, imageUrl, imagesUrl }) => {
+const AdminImgCard = ({ item, imageUrl, imagesUrl, type }) => {
   const url = useLocation();
-  const pathname = url.pathname;
+  // const pathname = url.pathname;
 
   const [selectedItem, setSelectedItem] = useContext(SelectedItemCtx);
 
@@ -22,7 +22,26 @@ const AdminImgCard = ({ item, imageUrl, imagesUrl }) => {
       // onClick={() => sendSelected(item)}
       onClick={() => setSelectedItem(item)}
     >
-      {pathname.includes("portfolio") ? (
+      {/* {pathname.includes("portfolio") ? (
+        <img src={imageUrl} loading="lazy" alt="" />
+      ) : (
+        <Swiper
+          modules={[Navigation, A11y, EffectFade, Mousewheel]}
+          slidesPerView={1}
+          loop
+          zoom={true}
+          effect={"fade"}
+          navigation
+          className="carousel__swiper"
+        >
+          {imagesUrl?.map((image) => (
+            <SwiperSlide key={image}>
+              <img src={image} alt="" loading="lazy" />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )} */}
+      {type == "single" ? (
         <img src={imageUrl} loading="lazy" alt="" />
       ) : (
         <Swiper

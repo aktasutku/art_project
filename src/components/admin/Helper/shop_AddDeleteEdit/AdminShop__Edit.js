@@ -6,11 +6,6 @@ import DoneSharpIcon from "@mui/icons-material/DoneSharp";
 import UploadIcon from "@mui/icons-material/Upload";
 // random id generator
 import { v4 as uuidv4 } from "uuid";
-// SWIPER
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import { Navigation, A11y, EffectFade, Mousewheel } from "swiper";
 //Firebase
 import {
   doc,
@@ -44,6 +39,7 @@ const AdminShop__Edit = ({ selectedItem }) => {
   const [newImgsURL, setNewImgsURL] = useState();
   const [progress, setProgress] = useState(false);
   const [uploaded, setUploaded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   //   FIREBASE
   const storage = getStorage();
@@ -68,6 +64,8 @@ const AdminShop__Edit = ({ selectedItem }) => {
     e.preventDefault();
   };
 
+  console.log(selectedImage);
+
   return (
     <div className="adminAddDeleteEdit">
       <div
@@ -76,22 +74,18 @@ const AdminShop__Edit = ({ selectedItem }) => {
       >
         <CloseSharpIcon />
       </div>
-      <div className="adminAddDeleteEdit__img">
-        <Swiper
-          modules={[Navigation, A11y, EffectFade, Mousewheel]}
-          slidesPerView={1}
-          loop
-          zoom={true}
-          effect={"fade"}
-          navigation
-          className="carousel__swiper"
-        >
-          {selectedItem?.images.map((image) => (
-            <SwiperSlide key={image.name + uuidv4()}>
-              <img src={image} alt="" loading="lazy" />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      <div className="adminAddDeleteEditShop__img">
+        {selectedItem?.images.map((image, i) => {
+          return (
+            <div
+              className={`AdminImgCard ${image == selectedImage && "active"}`}
+              // onClick={() => sendSelected(item)}
+              onClick={() => setSelectedImage(image)}
+            >
+              <img src={image} />
+            </div>
+          );
+        })}
       </div>
       {/* ADD ITEM FORM */}
       <form
@@ -100,7 +94,7 @@ const AdminShop__Edit = ({ selectedItem }) => {
       >
         {/*Add PANEL TITLE */}
         <div className="adminAdddeleteEdit__formTitle">
-          <p>Add Mode</p>
+          <p>Edit Mode</p>
           {uploaded && (
             <p className="adminAddDeleteEdit__success">
               ( {uploaded} <DoneSharpIcon sx={{ color: "green" }} />
@@ -160,7 +154,7 @@ const AdminShop__Edit = ({ selectedItem }) => {
           value={newDescription}
         ></textarea>
         <div className="adminAddDeleteEdit__buttons adminflexRow">
-          {!uploaded && <button type="submit">Add</button>}
+          {!uploaded && <button type="submit">Update</button>}
           <button onClick={handleCleanForm}>Clear Form</button>
         </div>
       </form>
