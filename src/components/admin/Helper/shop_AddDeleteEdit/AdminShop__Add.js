@@ -28,7 +28,6 @@ const AdminShop__Add = () => {
   const [discount, setDiscount] = useState(0);
   const [price, setPrice] = useState("");
   const [title, setTitle] = useState("");
-  const [images, setImages] = useState([]);
   // Local VARIABLES
   const [localImages, setLocalImages] = useState([]);
   const [uploaded, setUploaded] = useState(false);
@@ -40,7 +39,6 @@ const AdminShop__Add = () => {
   const [storageImgsURL, setStorageImgsURL] = useState([]);
 
   const handleCleanForm = () => {
-    setImages([]);
     setTitle("");
     setPrice("");
     setDiscount(0);
@@ -48,6 +46,7 @@ const AdminShop__Add = () => {
     setUploaded(false);
     setLocalImages([]);
   };
+  // Reserve the spot from storage for upcoming images
   useEffect(() => {
     let imgName = localImages[localImages.length - 1]?.name;
     if (imgName !== undefined) {

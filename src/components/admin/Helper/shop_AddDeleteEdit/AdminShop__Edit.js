@@ -13,6 +13,10 @@ import {
   addDoc,
   collection,
   setDoc,
+  updateDoc,
+  Firestore,
+  arrayRemove,
+  arrayUnion,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -22,7 +26,7 @@ import {
   uploadBytesResumable,
   uploadBytes,
 } from "firebase/storage";
-import { db } from "../../../../firebase";
+import { db, storage } from "../../../../firebase";
 import { ActiveAddDeleteEditContext } from "../../../../app/features/Context/AddEditDeleteActiveCxt";
 
 const AdminShop__Edit = ({ selectedItem }) => {
@@ -31,12 +35,14 @@ const AdminShop__Edit = ({ selectedItem }) => {
   const [editItemActive, setEditItemActive] = editActive;
 
   // VARIABLES
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
-  const [newDiscount, setNewDiscount] = useState("");
-  const [newPrice, setNewPrice] = useState("");
-  const [newImages, setNewImages] = useState();
-  const [newImgsURL, setNewImgsURL] = useState();
+  const [newTitle, setNewTitle] = useState(selectedItem?.title);
+  const [newDescription, setNewDescription] = useState(
+    selectedItem?.description
+  );
+  const [newDiscount, setNewDiscount] = useState(selectedItem?.discount);
+  const [newPrice, setNewPrice] = useState(selectedItem?.price);
+  const [newImages, setNewImages] = useState([]);
+  const [newImgsURL, setNewImgsURL] = useState([]);
   const [progress, setProgress] = useState(false);
   const [uploaded, setUploaded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -44,11 +50,12 @@ const AdminShop__Edit = ({ selectedItem }) => {
   //   FIREBASE
   const storage = getStorage();
   const selectedItemColRef = doc(db, "shopItems", selectedItem.id);
-  const itemStorageRef = ref(storage, "ShopImages", selectedItem.img);
-  const newItemStorageRef = ref(
-    storage,
-    `ShopImages/${newImages?.name + uuidv4()}`
-  );
+  const selectedImgStorageRef = ref(storage, selectedImage);
+  const [storageImgsRef, setStorageImgsRef] = useState([]);
+  // const newImgStorageRef = ref(
+  //   storage,
+  //   `ShopImages/${newImages?.name + uuidv4()}`
+  // );
 
   const handleCleanForm = () => {
     setNewTitle("");
@@ -60,11 +67,99 @@ const AdminShop__Edit = ({ selectedItem }) => {
     setProgress(false);
     setUploaded(false);
   };
+
+  // Reserve the spot from storage for upcoming images
+  useEffect(() => {
+    let imgName = newImages[newImages.length - 1]?.name;
+    if (imgName !== undefined) {
+      setStorageImgsRef((prev) => [
+        ...prev,
+        ref(storage, `ShopImages/${imgName + uuidv4()}`),
+      ]);
+    }
+  }, [newImages]);
+
   const handleEdit = (e) => {
     e.preventDefault();
+
+    storageImgsRef.map((imgStorageRef) => {
+      const image = newImages[storageImgsRef.indexOf(imgStorageRef)];
+      const uploadTask = uploadBytesResumable(imgStorageRef, image);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (error) => console.log(error),
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref)
+            .then((url) => {
+              setNewImgsURL((prev) => [...prev, url]);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      );
+    });
+
+    (newDescription !== selectedItem.description ||
+      newDiscount !== selectedItem.discount ||
+      newPrice !== selectedItem.price ||
+      newTitle !== selectedItem.title) &&
+      updateDoc(selectedItemColRef, {
+        description: newDescription,
+        discount: newDiscount,
+        price: newPrice,
+        title: newTitle,
+      });
   };
 
-  console.log(selectedImage);
+  useEffect(() => {
+    newImgsURL.length > 0 &&
+      newImgsURL.length === storageImgsRef.length &&
+      updateDoc(selectedItemColRef, {
+        images: arrayUnion(...newImgsURL),
+      });
+  }, [newImgsURL]);
+
+  // useEffect(() => {
+  //   newImgsURL.length > 0 &&
+  //     newImgsURL.length === storageImgsRef.length &&
+  //     updateDoc(selectedItemColRef, {
+  //       images: arrayUnion(...newImgsURL),
+  //     });
+  //   // if new value is not equalt to old value ( if user typed)
+  //   (newDescription !== selectedItem.description ||
+  //     newDiscount !== selectedItem.discount ||
+  //     newPrice !== selectedItem.price ||
+  //     newTitle !== selectedItem.title) &&
+  //     updateDoc(selectedItemColRef, {
+  //       description: newDescription,
+  //       discount: newDiscount,
+  //       price: newPrice,
+  //       title: newTitle,
+  //     });
+  // }, [newImgsURL, newDescription, newDiscount, newPrice, newTitle]);
+
+  //Delete single image each time
+  const handleDeleteImg = () => {
+    // DELETE URL FROM COLLECTION
+    updateDoc(selectedItemColRef, {
+      images: arrayRemove(selectedImage),
+    })
+      .then(() => {
+        console.log("image deleted from array");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // DELETE FROM STORAGE
+    deleteObject(selectedImgStorageRef)
+      .then(() => {
+        console.log("item deleted from storage");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="adminAddDeleteEdit">
@@ -79,13 +174,16 @@ const AdminShop__Edit = ({ selectedItem }) => {
           return (
             <div
               className={`AdminImgCard ${image == selectedImage && "active"}`}
-              // onClick={() => sendSelected(item)}
               onClick={() => setSelectedImage(image)}
+              key={i}
             >
               <img src={image} />
             </div>
           );
         })}
+        <button className="deleteImg" onClick={handleDeleteImg}>
+          Delete Image
+        </button>
       </div>
       {/* ADD ITEM FORM */}
       <form
@@ -113,7 +211,6 @@ const AdminShop__Edit = ({ selectedItem }) => {
                 e.target.files[0] &&
                   setNewImages((prev) => [...prev, e.target.files[0]]);
               }}
-              required
             />
             <UploadIcon sx={{ cursor: "pointer" }} />
             {newImages?.length > 0
@@ -126,16 +223,12 @@ const AdminShop__Edit = ({ selectedItem }) => {
           type="text"
           onChange={(e) => setNewTitle(e.target.value)}
           value={newTitle}
-          required
-          placeholder={selectedItem.title}
         />
         {/* PRICE */}
         <input
           type="number"
           onChange={(e) => setNewPrice(e.target.value)}
           value={newPrice}
-          required
-          placeholder={selectedItem.price}
           min="0"
         />
         {/* DISCOUNT */}
@@ -143,16 +236,15 @@ const AdminShop__Edit = ({ selectedItem }) => {
           type="number"
           onChange={(e) => setNewDiscount(e.target.value)}
           value={newDiscount}
-          placeholder={selectedItem.discount}
           min="0"
         />
         {/* DESCRIPTION */}
         <textarea
           rows="5"
-          placeholder={selectedItem.description}
           onChange={(e) => setNewDescription(e.target.value)}
           value={newDescription}
         ></textarea>
+        {/* BUTTONS */}
         <div className="adminAddDeleteEdit__buttons adminflexRow">
           {!uploaded && <button type="submit">Update</button>}
           <button onClick={handleCleanForm}>Clear Form</button>

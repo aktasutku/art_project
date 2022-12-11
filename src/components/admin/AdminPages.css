@@ -130,11 +130,16 @@
   margin-top: 10px;
 }
 
-.adminAddDeleteEdit__buttons button {
+.adminAddDeleteEdit__buttons button,
+.deleteImg {
   color: var(--main-color);
   cursor: pointer;
   border-color: var(--main-color);
   border-radius: 5px;
+}
+.deleteImg {
+  height: 60px;
+  margin-top: 10px;
 }
 
 .adminAddDeleteEdit__success {

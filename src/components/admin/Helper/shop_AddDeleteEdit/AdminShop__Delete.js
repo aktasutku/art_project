@@ -41,18 +41,21 @@ const AdminShop__Delete = ({ selectedItem }) => {
     selectedItemStorageRef.map((imgRef) => {
       deleteObject(imgRef)
         .then(() => {
-          selectedItemStorageRef.indexOf(imgRef) ===
-            selectedItemStorageRef.length - 1 && setActivate(true);
+          //what is this mean utku ?
+          // selectedItemStorageRef.indexOf(imgRef) ===
+          //   selectedItemStorageRef.length - 1 && setActivate(true);
+          setActivate(true);
         })
         .catch((err) => {
           console.log(err);
         });
     });
+    setActivate(true);
   };
   useEffect(() => {
-    // DELETE COLLECTIONG DOCUMENT FROM FIRESTORE
+    // DELETE COLLECTION DOCUMENT FROM FIRESTORE
     selectedItemColRef &&
-      activate === true &&
+      activate === true && // turn this back to true
       deleteDoc(selectedItemColRef)
         .then(() => {
           setDeleteSureActive(true);
