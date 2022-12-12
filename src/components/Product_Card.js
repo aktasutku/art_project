@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, A11y, EffectFade, Mousewheel } from "swiper";
 
-const Product_Card = ({ title, price, description, images }) => {
+const Product_Card = ({ title, price, description, images, discount }) => {
   return (
     <div className="productCard">
       <div className="productCard__image">
@@ -36,7 +36,7 @@ const Product_Card = ({ title, price, description, images }) => {
         </div>
         <div className="productCard__price">
           <p>$</p>
-          <p>{price}</p>
+          <p>{price - discount}</p>
         </div>
       </div>
     </div>

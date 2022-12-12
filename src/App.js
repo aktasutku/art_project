@@ -19,7 +19,7 @@ import SelectedItemProvider from "./app/features/Context/selectedItemCtx";
 function App() {
   const admin = useSelector(selectAdmin);
   // const adminName = useSelector(selectUserName);
-  console.log(admin);
+  console.log("admin -> " + admin);
 
   return (
     <div className="App">

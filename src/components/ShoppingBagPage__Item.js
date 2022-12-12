@@ -11,7 +11,6 @@ import {
   removeCartItem,
 } from "../app/features/cartItem/cartItemSlice";
 import { useState } from "react";
-// import {  } from "../app/features/counter/cartCounterSlice";
 
 const ShoppingBagPage__Item = ({
   id,

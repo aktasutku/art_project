@@ -67,6 +67,7 @@ const Header = () => {
       navigate(location.pathname); // on refresh going to same direction
     });
   }, [userName]);
+  console.log(auth.currentUser);
 
   const handleAuth = () => {
     if (!userName) {
@@ -127,7 +128,7 @@ const Header = () => {
             <p onClick={handleAuth}>Sign in</p>
           ) : (
             <div className="header__bag__signedIn">
-            {/* if admin true show me admin panel */}
+              {/* if admin true show me admin panel */}
               {admin && (
                 <>
                   <p onClick={() => navigate("admin")}>Admin</p>

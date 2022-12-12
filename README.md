@@ -5,10 +5,9 @@ These notes are for me
 
 Work on:
 
-- Replace Redux and usecontext with redux toolkit
+- Improve admin enterance on firebase**
+- SignIn Pop-Up dosent show on the phone**
 - Add RealTime Chat admin with Client
-- SignIn Pop-Up dosent show on the phone
-- Improve admin enterance on firebase
 - Add contact me page
 - Find how to declare global theme for MUI
 - Shopping bag Checkout

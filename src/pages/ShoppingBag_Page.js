@@ -41,6 +41,8 @@ const ShoppingBagPage = () => {
 
   subTotal = itemsTotalCost - discount;
 
+
+
   return (
     <div className="ShoppingBagPage">
       <div className="ShoppingBagPage__Items">
