@@ -1,19 +1,20 @@
 Currently I am working on this project
+This project will take peace from ETSY
 
-I will work on
+These notes are for me
 
-- Firebase data upload for Admin in process..
-- Keep working on Admin Panel in process..
+Work on:
+
+- Replace Redux and usecontext with redux toolkit
 - Add RealTime Chat admin with Client
 - SignIn Pop-Up dosent show on the phone
-- uploadbytes upload bunch of undefined images to storage how to figure out ?
+- Improve admin enterance on firebase
 - Add contact me page
 - Find how to declare global theme for MUI
 - Shopping bag Checkout
 - Recent Art Project pages
 - Customized Portrait
 - handle email subscription
-- Firebase authentication take it to do header
 - add timestamp to firebase so if img loaded in last 3 days (orderBY check this command) show NewArt on productCard
 
 

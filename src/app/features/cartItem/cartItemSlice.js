@@ -1,10 +1,8 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const initialState = [];
-
 const cartSlice = createSlice({
   name: "cartItems",
-  initialState,
+  initialState: [],
   reducers: {
     addItemtoCart: {
       reducer(state, action) {
@@ -54,7 +52,6 @@ const cartSlice = createSlice({
       },
     },
     removeCartItem: (state, action) => {
-      // state = state.filter((item) => item !== action.payload.id);
       return state.filter((item) => item.id !== action.payload);
     },
   },
