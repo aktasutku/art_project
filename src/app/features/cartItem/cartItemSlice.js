@@ -1,58 +1,15 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-console.log('gg')
+console.log("gg");
 const cartSlice = createSlice({
   name: "cartItems",
-  initialState: [],
+  initialState: {
+    items: [],
+    totalQuantity: 0,
+  },
   reducers: {
-    addItemtoCart: {
-      reducer(state, action) {
-        state.push(action.payload);
-      },
-      prepare(
-        id,
-        title,
-        eachPrice,
-        qty,
-        total,
-        img,
-        discount,
-        discountedPrice
-      ) {
-        return {
-          payload: {
-            id,
-            title,
-            eachPrice,
-            qty,
-            total,
-            img,
-            discount,
-            discountedPrice,
-          },
-        };
-      },
-    },
-    updateExistingCartItemQty: {
-      reducer(state, action) {
-        state = state.map((item) => {
-          if (item.id === action.payload.id) {
-            item.qty = action.payload.qty;
-            item.total = action.payload.total;
-          }
-        });
-      },
-      prepare(id, qty, total) {
-        return {
-          payload: {
-            id,
-            qty,
-            total,
-          },
-        };
-      },
-    },
-    removeCartItem: (state, action) => {
-      return state.filter((item) => item.id !== action.payload);
+    addItemtoCart(state, action) {
+      const newItem = action.payload;
+      const existingItem = state.items.find((item) => item.id === newItem.id);
     },
   },
 });
