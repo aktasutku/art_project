@@ -1,5 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-
+console.log('gg')
 const cartSlice = createSlice({
   name: "cartItems",
   initialState: [],
