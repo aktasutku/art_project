@@ -40,7 +40,7 @@ const AdminShop__Add = () => {
 
   const handleCleanForm = () => {
     setTitle("");
-    setPrice("");
+    setPrice();
     setDiscount(0);
     setDescription("");
     setUploaded(false);
@@ -85,8 +85,8 @@ const AdminShop__Add = () => {
       storageImgsURL.length === storageImgsRef.length &&
       addDoc(shopItemsCol, {
         description: description,
-        discount: discount,
-        price: price,
+        discount: Number(discount),
+        price: Number(price),
         title: title,
         images: [...storageImgsURL],
       }).then(() => {

@@ -26,22 +26,22 @@ const ShoppingBagPage = () => {
   });
   const dispatch = useDispatch();
   const cartItems = useSelector(selectAllCartItems);
+  const totalItemsQty = useSelector((state) => state.cartItems.totalQuantity);
 
-  let totalItemsQty = 0;
   let itemsTotalCost = 0;
   let subTotal = 0;
   let discount = 0;
 
   cartItems.map((item) => {
-    totalItemsQty += Number(item.qty);
-    itemsTotalCost += item.eachPrice * item.qty;
+    itemsTotalCost += item.qty * item.price;
     discount += item.discount * item.qty;
   });
+
+  console.log(itemsTotalCost);
+  console.log(discount);
   //dont take this top of the mapped cartItems
 
   subTotal = itemsTotalCost - discount;
-
-
 
   return (
     <div className="ShoppingBagPage">
@@ -59,10 +59,12 @@ const ShoppingBagPage = () => {
                 key={item.id}
                 id={item.id}
                 title={item.title}
-                eachPrice={item.eachPrice}
+                eachPrice={item.price}
                 qty={item.qty}
-                totalPrice={item.total}
-                itemImg={item.img}
+                totalPrice={item.totalPrice}
+                itemImg={item.images}
+                discount={item.discount}
+                discountedPrice={item.discountedPrice}
                 theme={theme}
               />
             </>

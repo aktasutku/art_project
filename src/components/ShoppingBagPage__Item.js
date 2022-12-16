@@ -6,9 +6,9 @@ import Button from "@mui/material/Button";
 import { ThemeProvider } from "@mui/material/styles";
 
 import {
-  updateExistingCartItemQty,
+  updateExistingCartItem,
   selectAllCartItems,
-  removeCartItem,
+  removeItemFromCart,
 } from "../app/features/cartItem/cartItemSlice";
 import { useState } from "react";
 
@@ -19,86 +19,71 @@ const ShoppingBagPage__Item = ({
   qty,
   totalPrice,
   itemImg,
+  discount,
+  discountedPrice,
   theme,
 }) => {
+  const buttonStyle = {
+    color: "#FFF",
+    letterSpacing: 2,
+    fontSize: 12,
+    fontWeight: 400,
+    padding: 0,
+    "&:hover": { backgroundColor: "#FFF", color: "#FB8712" },
+  };
   const dispatch = useDispatch();
   const cartItems = useSelector(selectAllCartItems);
-  const [itemQty, setItemQty] = useState(qty);
-  const [total, setTotal] = useState(totalPrice);
-
-  useEffect(() => {
-    setTotal(itemQty * eachPrice);
-  }, [itemQty]);
+  const [itemQty, setItemQty] = useState(Number(qty));
 
   const handleUpdate = () => {
-    dispatch(updateExistingCartItemQty(id, itemQty, total));
+    dispatch(updateExistingCartItem({ id, itemQty }));
   };
 
   const handleRemove = () => {
-    dispatch(removeCartItem(id));
+    dispatch(removeItemFromCart(id));
   };
 
   return (
-    <div className="ShoppingBagPage__Item">
-      <div className="ShoppingBagPage__Item__section">
-        <div className="ShoppingBagPage__Item__img">
-          <img src={itemImg} />
+    <ThemeProvider theme={theme}>
+      <div className="ShoppingBagPage__Item">
+        <div className="ShoppingBagPage__Item__section">
+          <div className="ShoppingBagPage__Item__img">
+            <img src={itemImg} />
+          </div>
+          <h2>{title}</h2>
         </div>
-        <h2>{title}</h2>
-      </div>
-      <div className="ShoppingBagPage__Item__price">
-        <div className="sip__each">
-          <h3>Each</h3>
-          <p>$ {eachPrice}</p>
-        </div>
-        <div className="sip__quantity">
-          <h3>Quantity</h3>
-          <input
-            type="number"
-            defaultValue={itemQty}
-            min={0}
-            onChange={(e) => setItemQty(e.target.value)}
-          />
-          <ThemeProvider theme={theme}>
-            <Button
-              variant="contained"
-              onClick={handleUpdate}
-              sx={{
-                color: "#FFF",
-                letterSpacing: 2,
-                fontSize: 12,
-                fontWeight: 400,
-                padding: 0,
-                "&:hover": { backgroundColor: "#FFF", color: "#FB8712" },
-              }}
-            >
+        <div className="ShoppingBagPage__Item__price">
+          <div className="sip__each">
+            <h3>Each</h3>
+            <p>$ {eachPrice}</p>
+          </div>
+          <div className="sip__discount">
+            <h3>Discount</h3>
+            <p>$ {discount}</p>
+          </div>
+          <div className="sip__quantity">
+            <h3>Quantity</h3>
+            <input
+              type="number"
+              defaultValue={itemQty}
+              min={0}
+              onChange={(e) => setItemQty(Number(e.target.value))}
+            />
+            <Button variant="contained" onClick={handleUpdate} sx={buttonStyle}>
               Update
             </Button>
-          </ThemeProvider>
-        </div>
+          </div>
 
-        <div className="sip__price">
-          <h3>Total</h3>
-          <p>$ {total}</p>
-          <ThemeProvider theme={theme}>
-            <Button
-              variant="contained"
-              onClick={handleRemove}
-              sx={{
-                color: "#FFF",
-                letterSpacing: 2,
-                fontSize: 12,
-                fontWeight: 400,
-                padding: 0,
-                "&:hover": { backgroundColor: "#FFF", color: "#FB8712" },
-              }}
-            >
+          <div className="sip__price">
+            <h3>Total</h3>
+            <p>$ {totalPrice}</p>
+            <Button variant="contained" onClick={handleRemove} sx={buttonStyle}>
               Remove
             </Button>
-          </ThemeProvider>
+          </div>
         </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 };
 

@@ -12,14 +12,13 @@
 .ShoppingBagPage__Item__img {
   border: 1px solid red;
   width: 150px;
-  height: 200px;  
+  height: 200px;
 }
-.ShoppingBagPage__Item__img > img{
+.ShoppingBagPage__Item__img > img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-
 
 .ShoppingBagPage__Item__section > h2 {
   font-weight: 400;
@@ -37,18 +36,21 @@
 
 .sip__each,
 .sip__quantity,
+.sip__discount,
 .sip__price {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  align-items: center;
 }
 
 .sip__quantity > input {
   width: 50px;
 }
-.sip__price > button {
+
+/* .sip__price > button {
   margin-top: auto;
-}
+} */
 
 .sip__price > h3 {
   display: flex;
@@ -65,9 +67,6 @@
   .ShoppingBagPage__Item {
     flex-direction: column;
   }
-  .ShoppingBagPage__Item__price {
-    margin-left: 0;
-  }
 }
 
 /* @media only screen and (max-width: 900px) {
@@ -77,6 +76,11 @@
   .ShoppingBagPage__Item__section > h2 {
     font-size: 20px;
     font-weight: 400;
+  }
+  .ShoppingBagPage__Item__price {
+    margin-left: 0;
+    font-size: 12px;
+    gap: 25px;
   }
 }
 

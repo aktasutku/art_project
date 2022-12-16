@@ -44,11 +44,13 @@ const Product_Page = () => {
 
   const [currentData, setCurrentData] = useState([]);
   const [qty, setQty] = useState(0);
-  let total = qty * (currentData.price - currentData.discount);
+  let totalPrice = qty * (currentData.price - currentData.discount);
   //Redux
   const dispatch = useDispatch();
   const cartItems = useSelector(selectAllCartItems);
   const [discountedPrice, setDiscountedPrice] = useState(0);
+
+  // const cartData = useSelector((state) => state.cartItems.items);
 
   //fetch data from Firebase for shopItems
   useEffect(() => {
@@ -66,26 +68,24 @@ const Product_Page = () => {
 
   const handleAdd = () => {
     if (qty > 0) {
-      if (Boolean(cartItems.find((item) => item.id === currentData.id))) {
-        dispatch(updateExistingCartItemQty(currentData.id, qty, total));
-      } else {
-        dispatch(
-          addItemtoCart(
-            currentData.id,
-            currentData.title,
-            currentData.price,
-            qty,
-            total,
-            currentData.images[0],
-            currentData.discount,
-            discountedPrice
-          )
-        );
-      }
+      dispatch(
+        addItemtoCart({
+          id: currentData.id,
+          title: currentData.title,
+          price: currentData.price,
+          qty: Number(qty),
+          totalPrice,
+          images: currentData.images[0],
+          discount: currentData.discount,
+          discountedPrice,
+        })
+      );
     }
 
     setQty(0);
   };
+
+  // console.log(cartData);
 
   return (
     <div className="product__page">

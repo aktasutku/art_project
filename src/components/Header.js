@@ -18,7 +18,7 @@ import { auth } from "../firebase";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllCartItems } from "../app/features/cartItem/cartItemSlice";
+import { totalQuantity } from "../app/features/cartItem/cartItemSlice";
 import {
   selectUserName,
   setUserSignOut,
@@ -33,21 +33,16 @@ const Header = () => {
   //FIREBASE
   const provider = new GoogleAuthProvider();
   //Redux
-  const cartItems = useSelector(selectAllCartItems);
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const admin = useSelector(selectAdmin);
+  const totalItemsQty = useSelector(totalQuantity);
 
   // Local Variables
   const [display, setDisplay] = useState(false);
   // className variables
   const activeHeader = ({ isActive }) => (isActive ? "headerActive" : "");
   const ulList = display ? "header__list " : "header__list header__list__none ";
-  let totalItemsQty = 0;
-
-  cartItems.map((item) => {
-    totalItemsQty += Number(item.qty);
-  });
 
   const setUser = (user) => {
     dispatch(
@@ -60,6 +55,7 @@ const Header = () => {
       })
     );
   };
+  console.log(totalItemsQty);
   //This keeps us logged in on refresh page
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -67,7 +63,7 @@ const Header = () => {
       navigate(location.pathname); // on refresh going to same direction
     });
   }, [userName]);
-  console.log(auth.currentUser);
+  // console.log(auth.currentUser);
 
   const handleAuth = () => {
     if (!userName) {
@@ -141,11 +137,9 @@ const Header = () => {
         </div>
         <div className="header__bag__container">
           <MdOutlineShoppingBag className="header__bag__icon" />
-          {totalItemsQty > 0 && (
-            <div className="header__bag__number  animate__animated animate__bounce">
-              {totalItemsQty}
-            </div>
-          )}
+          <div className="header__bag__number  animate__animated animate__bounce">
+            {totalItemsQty}
+          </div>
           <p>
             <NavLink className={activeHeader} to="/shopping-bag">
               Shopping Bag
