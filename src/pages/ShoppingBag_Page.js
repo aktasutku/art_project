@@ -2,7 +2,7 @@ import React from "react";
 import "./ShoppingBag_Page.css";
 import ShoppingBagPage__Item from "../components/ShoppingBagPage__Item";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllCartItems } from "../app/features/cartItem/cartItemSlice";
+import { selectAllCartItems } from "../app/cartItemSlice";
 
 // Mui Components
 import Button from "@mui/material/Button";

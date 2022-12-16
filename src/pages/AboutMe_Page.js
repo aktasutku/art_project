@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import "./AboutMe_Page.css";
+import about from "../assets/wall3.png";
 
 const AboutMe_Page = () => {
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="AboutMe_Page">
       <header>Meet the Artist</header>
 
       <div className="AboutMePage_one">
-        <img src="https://images.unsplash.com/photo-1617503752587-97d2103a96ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=486&q=80" />
+        <img src={about} />
         <div>
           <h1>Soraya Dorce</h1>
           <p>

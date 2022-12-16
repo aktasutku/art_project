@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import {
   selectUserPhoto,
   selectUserName,
-} from "../../app/features/user/userSlice";
+} from "../../app/userSlice";
 import { NavLink } from "react-router-dom";
 //animate
 import "animate.css";

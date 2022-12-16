@@ -18,13 +18,13 @@ import { auth } from "../firebase";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { totalQuantity } from "../app/features/cartItem/cartItemSlice";
+import { totalQuantity } from "../app/cartItemSlice";
 import {
   selectUserName,
   setUserSignOut,
   setUserLoginDetails,
   selectAdmin,
-} from "../app/features/user/userSlice";
+} from "../app/userSlice";
 
 const Header = () => {
   // REACT ROUTER

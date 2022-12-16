@@ -12,18 +12,16 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-// import { addValue } from "../app/features/counter/cartCounterSlice";
 import {
   addItemtoCart,
   updateExistingCartItemQty,
   selectAllCartItems,
-} from "../app/features/cartItem/cartItemSlice";
+} from "../app/cartItemSlice";
 //FIREBASE
 import { shopItemsCol } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 //React Router
 import { useParams } from "react-router-dom";
-// const myItems = require("../Items.json");
 //Mui Palette
 const theme = createTheme({
   palette: {
@@ -50,14 +48,13 @@ const Product_Page = () => {
   const cartItems = useSelector(selectAllCartItems);
   const [discountedPrice, setDiscountedPrice] = useState(0);
 
-  // const cartData = useSelector((state) => state.cartItems.items);
+
 
   //fetch data from Firebase for shopItems
   useEffect(() => {
     const getShopItem = async () => {
       const docRef = doc(shopItemsCol, id);
       const fireStoreData = await getDoc(docRef);
-      // console.log(fireStoreData.data());
       setCurrentData({ ...fireStoreData.data(), id: id });
       setDiscountedPrice(
         fireStoreData.data().price - fireStoreData.data().discount
@@ -84,8 +81,6 @@ const Product_Page = () => {
 
     setQty(0);
   };
-
-  // console.log(cartData);
 
   return (
     <div className="product__page">

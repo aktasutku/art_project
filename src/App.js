@@ -11,7 +11,7 @@ import AboutMe_Page from "./pages/AboutMe_Page";
 import Portfolio_Page from "./pages/Portfolio_Page";
 import Admin_Page from "./pages/Admin_Page";
 //redux
-import { selectUserName, selectAdmin } from "./app/features/user/userSlice";
+import { selectUserName, selectAdmin } from "./app/userSlice";
 import { useSelector } from "react-redux";
 import ActiveAddDeleteEditProvider from "./app/features/Context/AddEditDeleteActiveCxt";
 import SelectedItemProvider from "./app/features/Context/selectedItemCtx";

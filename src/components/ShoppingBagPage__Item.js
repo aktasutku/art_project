@@ -9,7 +9,7 @@ import {
   updateExistingCartItem,
   selectAllCartItems,
   removeItemFromCart,
-} from "../app/features/cartItem/cartItemSlice";
+} from "../app/cartItemSlice";
 import { useState } from "react";
 
 const ShoppingBagPage__Item = ({
