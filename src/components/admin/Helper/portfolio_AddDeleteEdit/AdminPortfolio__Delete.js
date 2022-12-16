@@ -6,7 +6,7 @@ import DoneSharpIcon from "@mui/icons-material/DoneSharp";
 import { doc, deleteDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import { db, storage } from "../../../../firebase";
-import { ActiveAddDeleteEditContext } from "../../../../app/features/Context/AddEditDeleteActiveCxt";
+import { ActiveAddDeleteEditContext } from "../../../../app/Context/AddEditDeleteActiveCxt";
 
 const AdminPortfolio__Delete = ({ selectedItem }) => {
   // CONTEXT

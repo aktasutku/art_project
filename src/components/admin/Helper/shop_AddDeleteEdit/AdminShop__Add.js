@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 //CONTEXT
-import { ActiveAddDeleteEditContext } from "../../../../app/features/Context/AddEditDeleteActiveCxt";
+import { ActiveAddDeleteEditContext } from "../../../../app/Context/AddEditDeleteActiveCxt";
 // RANDOM CHARACTERS
 import { v4 as uuidv4 } from "uuid";
 // SWIPER

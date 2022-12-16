@@ -27,7 +27,7 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { db, storage } from "../../../../firebase";
-import { ActiveAddDeleteEditContext } from "../../../../app/features/Context/AddEditDeleteActiveCxt";
+import { ActiveAddDeleteEditContext } from "../../../../app/Context/AddEditDeleteActiveCxt";
 
 const AdminShop__Edit = ({ selectedItem }) => {
   // CONTEXT

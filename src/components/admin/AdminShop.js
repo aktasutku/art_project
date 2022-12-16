@@ -3,8 +3,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { onSnapshot, collection } from "firebase/firestore";
 import { db } from "../../firebase";
 // CONTEXT
-import { ActiveAddDeleteEditContext } from "../../app/features/Context/AddEditDeleteActiveCxt";
-import { SelectedItemCtx } from "../../app/features/Context/selectedItemCtx";
+import { ActiveAddDeleteEditContext } from "../../app/Context/AddEditDeleteActiveCxt";
+import { SelectedItemCtx } from "../../app/Context/selectedItemCtx";
 // HELPER
 import AdminShop__Add from "./Helper/shop_AddDeleteEdit/AdminShop__Add";
 import AdminShop__Delete from "./Helper/shop_AddDeleteEdit/AdminShop__Delete";

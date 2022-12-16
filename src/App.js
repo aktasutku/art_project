@@ -13,8 +13,8 @@ import Admin_Page from "./pages/Admin_Page";
 //redux
 import { selectUserName, selectAdmin } from "./app/userSlice";
 import { useSelector } from "react-redux";
-import ActiveAddDeleteEditProvider from "./app/features/Context/AddEditDeleteActiveCxt";
-import SelectedItemProvider from "./app/features/Context/selectedItemCtx";
+import ActiveAddDeleteEditProvider from "./app/Context/AddEditDeleteActiveCxt";
+import SelectedItemProvider from "./app/Context/selectedItemCtx";
 
 function App() {
   const admin = useSelector(selectAdmin);

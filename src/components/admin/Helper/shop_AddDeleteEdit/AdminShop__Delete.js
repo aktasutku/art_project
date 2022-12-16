@@ -6,7 +6,7 @@ import DoneSharpIcon from "@mui/icons-material/DoneSharp";
 import { doc, deleteDoc } from "firebase/firestore";
 import { ref, deleteObject, getStorage } from "firebase/storage";
 import { db } from "../../../../firebase";
-import { ActiveAddDeleteEditContext } from "../../../../app/features/Context/AddEditDeleteActiveCxt";
+import { ActiveAddDeleteEditContext } from "../../../../app/Context/AddEditDeleteActiveCxt";
 // SWIPER
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";

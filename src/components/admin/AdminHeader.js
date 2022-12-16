@@ -4,8 +4,8 @@ import AddCircleSharpIcon from "@mui/icons-material/AddCircleSharp";
 import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
 import ModeEditOutlineSharpIcon from "@mui/icons-material/ModeEditOutlineSharp";
 // Context
-import { ActiveAddDeleteEditContext } from "../../app/features/Context/AddEditDeleteActiveCxt";
-import { SelectedItemCtx } from "../../app/features/Context/selectedItemCtx";
+import { ActiveAddDeleteEditContext } from "../../app/Context/AddEditDeleteActiveCxt";
+import { SelectedItemCtx } from "../../app/Context/selectedItemCtx";
 
 const icons = [
   { icon: AddCircleSharpIcon, name: "Add Item" },

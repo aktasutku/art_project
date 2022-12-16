@@ -14,8 +14,8 @@ import {
   getFirestore,
   collection,
 } from "firebase/firestore";
-import { SelectedItemCtx } from "../../app/features/Context/selectedItemCtx";
-import { ActiveAddDeleteEditContext } from "../../app/features/Context/AddEditDeleteActiveCxt";
+import { SelectedItemCtx } from "../../app/Context/selectedItemCtx";
+import { ActiveAddDeleteEditContext } from "../../app/Context/AddEditDeleteActiveCxt";
 
 const AdminPortfolio = () => {
   //Scrool Top when Page Load

@@ -8,7 +8,7 @@ import AdminHeader from "../components/admin/AdminHeader";
 // React Router
 import { useLocation } from "react-router-dom";
 // Context
-import { ActiveAddDeleteEditContext } from "../app/features/Context/AddEditDeleteActiveCxt";
+import { ActiveAddDeleteEditContext } from "../app/Context/AddEditDeleteActiveCxt";
 
 const Admin_Page = () => {
   // const adminName = useSelector(selectUserName);

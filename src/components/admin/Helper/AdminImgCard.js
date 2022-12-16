@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, A11y, EffectFade, Mousewheel } from "swiper";
 // CONTEXT
-import { SelectedItemCtx } from "../../../app/features/Context/selectedItemCtx";
+import { SelectedItemCtx } from "../../../app/Context/selectedItemCtx";
 
 const AdminImgCard = ({ item, imageUrl, imagesUrl, type }) => {
   const url = useLocation();
