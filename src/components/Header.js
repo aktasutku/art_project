@@ -55,7 +55,6 @@ const Header = () => {
       })
     );
   };
-  console.log(totalItemsQty);
   //This keeps us logged in on refresh page
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {

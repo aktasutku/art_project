@@ -12,13 +12,35 @@ import Portfolio_Page from "./pages/Portfolio_Page";
 import Admin_Page from "./pages/Admin_Page";
 //redux
 import { selectUserName, selectAdmin } from "./app/userSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ActiveAddDeleteEditProvider from "./app/Context/AddEditDeleteActiveCxt";
 import SelectedItemProvider from "./app/Context/selectedItemCtx";
+import { useEffect } from "react";
+import { fetchCartData, sendCartData } from "./app/cart-actions";
+
+//when page load first time avoid cart data sending
+let isInitial = true;
 
 function App() {
+  const dispatch = useDispatch();
   const admin = useSelector(selectAdmin);
   // const adminName = useSelector(selectUserName);
+  const cart = useSelector((state) => state.cartItems);
+  console.log(cart);
+
+  // FETCH CART DATA
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
+
+  // SEND CART DATA
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+    if (cart.changed) dispatch(sendCartData(cart));
+  }, [cart, dispatch]);
 
   return (
     <div className="App">

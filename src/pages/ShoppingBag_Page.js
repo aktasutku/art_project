@@ -37,8 +37,6 @@ const ShoppingBagPage = () => {
     discount += item.discount * item.qty;
   });
 
-  console.log(itemsTotalCost);
-  console.log(discount);
   //dont take this top of the mapped cartItems
 
   subTotal = itemsTotalCost - discount;
@@ -53,10 +51,10 @@ const ShoppingBagPage = () => {
         {/* when you map include hr too */}
         {cartItems.map((item) => {
           return (
-            <>
+            <div key={item.id}>
               <hr />
               <ShoppingBagPage__Item
-                key={item.id}
+                // key={item.id}
                 id={item.id}
                 title={item.title}
                 eachPrice={item.price}
@@ -67,7 +65,7 @@ const ShoppingBagPage = () => {
                 discountedPrice={item.discountedPrice}
                 theme={theme}
               />
-            </>
+            </div>
           );
         })}
       </div>
