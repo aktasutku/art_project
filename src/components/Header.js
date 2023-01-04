@@ -55,6 +55,7 @@ const Header = () => {
       })
     );
   };
+
   //This keeps us logged in on refresh page
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -70,6 +71,7 @@ const Header = () => {
         .then((result) => {
           setUser(result.user);
           admin && navigate("/admin");
+          console.log(result);
         })
         .catch((error) => {
           console.log(error.message);
@@ -79,7 +81,6 @@ const Header = () => {
         .then(() => {
           dispatch(setUserSignOut());
           navigate("/home"); // ??? it dosent direct me to home page
-          console.log("home");
         })
         .catch((err) => alert(err.message));
     }

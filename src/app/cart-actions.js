@@ -8,7 +8,7 @@ export const fetchCartData = () => {
       );
       if (!response.ok) throw new Error("Could not fetch data");
       const data = await response.json();
-      console.log(data);
+
       return data;
     };
     try {
@@ -28,7 +28,6 @@ export const fetchCartData = () => {
 export const sendCartData = (cart) => {
   return async () => {
     const sendRequest = async () => {
-      console.log(cart);
       const response = await fetch(
         `${process.env.REACT_APP_REALTIMEDATABASE_URL}/cart.json`,
         {

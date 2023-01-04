@@ -1,7 +1,6 @@
-Currently I am working on this project
-This project will take peace from ETSY
+Working on E-commerce project
 
-These notes are for me
+Notes for me
 
 Work on:
 

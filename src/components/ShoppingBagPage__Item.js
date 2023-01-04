@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "./ShoppingBagPage__Item.css";
 import { useSelector, useDispatch } from "react-redux";
 //MUI
@@ -10,7 +10,6 @@ import {
   selectAllCartItems,
   removeItemFromCart,
 } from "../app/cartItemSlice";
-import { useState } from "react";
 
 const ShoppingBagPage__Item = ({
   id,
